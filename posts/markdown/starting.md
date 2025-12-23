@@ -1,11 +1,10 @@
+---
+title: first blog post
+date: Monday December 22, 2025
+description: Introducing the blog
+---
+
 # first blog post!
-
-Date: Monday December 22, 2025
-
-## Description
-
-Arjun's personal blog's introduction
-
 ## What is this?
 
 This is a place for me to store my projects and what I am working on. I need this because:

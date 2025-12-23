@@ -3,6 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
+    "parse": "ts-node scripts/parser.ts",
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
@@ -30,13 +31,16 @@
     "@angular/platform-browser": "^21.0.0",
     "@angular/router": "^21.0.0",
     "rxjs": "~7.8.0",
+    "ts-node": "^10.9.2",
     "tslib": "^2.3.0"
   },
   "devDependencies": {
     "@angular/build": "^21.0.4",
     "@angular/cli": "^21.0.4",
     "@angular/compiler-cli": "^21.0.0",
+    "gray-matter": "^4.0.3",
     "jsdom": "^27.1.0",
+    "marked": "^17.0.1",
     "typescript": "~5.9.2",
     "vitest": "^4.0.8"
   }
