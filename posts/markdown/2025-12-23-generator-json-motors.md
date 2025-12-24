@@ -1,0 +1,67 @@
+---
+title: Motors + Site Generator + JSON
+date: 2025-12-23
+description: On my website, I made an automatic site generator and JSON file to store all sites. I also made an electrical project to make Raspberry PI + Arduino talk and move gear motors around.
+---
+
+# Motors + Site Generator + JSON
+
+First I'll talk about the electrical project I'm working on, then my changes to this site.
+
+## Electrical project
+
+I didn't talk about it last time, but I've been trying to make a smart car. I have made an electrical car in the past using Arduino + Gear motors + Adafruit motor shield, and now I want to remake that project since recently I have got a Raspberry PI (it's really good btw). The smart features I want to add are cameras, maybe a screen, and other random components I can find in my electrical bin.
+
+If you read this post's description, you would've seen I said, "I also made an electrical project to make Raspberry PI + Arduino talk and move gear motors around" (Me, 2025, literally 2 minutes ago, it's important to credit your quotes guys). Now, if you know a speck of dust about Arduinos and Raspberry PIs, you would realize that they _BOTH_ can control motors. You might be asking why I need 2 "microcontrollers" (in quotes because PIs aren't microcontrollers aparently according to ChatGPT) to control something that _BOTH_ can control, the answer is that my motor shield only works for Arduino and I don't want to get a specific alternative for my PI. The solution I thought of is just to use _BOTH_ of them (both counter in this one paragraph: 3).
+
+I remember when I was trying to search for specific tutorials on how to use the PI when I was _really_ starting out, I saw one that taught how to use Arduinos AND Raspberry PIs. I had glossed over it since I just wanted to use a PI, but I got a flashback to that course when I had this problem. So, I rummaged the internet on how to use Arduinos and Raspberry PIs in unison (spoiler alert: it's pretty easy).
+
+How it works is by understanding a tiny part of Arduinos: its ability to read and write to serial. The serial works through the cable that connects the Arduino to a device via USB, and lo and behold the Raspberry PI has a USB port. All I did on the Arduino was read from serial, write back saying that it recived the message (for debug purposes), and just move the gear motors.
+
+When I tested it, the motors moved brilliantly, no bugs, but all my wires got tangled because I just ran it without any support and now I'm scared to run it again. I also could only find 3 out of 4 of my old gear motors, so now we're building a 3 wheeled car!
+
+![Circuit, too bad you can't see it](/posts/assets/IMG_0279.png 'bruh')
+
+## Website
+
+### Parser
+
+I actually completed some of my day 1 aspirations pretty quickly. For one, I made a site parser. Right now, I'm writing in a markdown file because it's easy to use, and I have a VSCode extension to preview how my text looks like. But the problem is, you can't exactly put raw markdown on a website (at least, not to my knowledge, and even if you can there's a ton of HTML features I don't want to miss out on, like styling). So what I did was I made a parser that parses my markdown files and converts them to HTML.
+
+It was actually pretty easy, thanks to the extensive NodeJS community. I used mainly two libraries for this: `marked`, and `gray-matter`. Marked is the library that just converts my markdown into HTML. You might be thinking that that's all that needs to happen, but no. I want to have metadata too just for some other ideas I have in mind. At the time of typing, you will be able to see a fieldset with a legend called "Metadata" with all the data in there. What metadata you may ask? This metadata:
+
+![Image to show what I just said](/posts/assets/Screenshot%202025-12-23%20at%208.55.53 PM.png "never gunna give you up")
+
+### JSON
+
+Basically, in the frontend you can't really access files unless they are JSON. So instead of going through my directory of all my blog posts, I just put their paths in a file called `sites.json` and put that in my `public` directory so Angular is happy. Yes I am using Angular for this project, and yes I know I said it's supposed to be a side project, and yes I know Angular is mainly for large teams, but damn Angular is fun to use. I never liked web development, more of a guy who craves action like in game dev or electrical dev, but Angular is some of the most fun I've had making websites. It just makes sense. In fact, I'm having a hard time keeping this a side project. To be fair, I didn't do too much Angular dev yet, just this backend stuff, but I am excited for the Angular dev part and I don't want to jinx it.
+
+### Site Generator
+
+I don't want to type in a bunch of boilerplate every time I'm trying to make a blog post, so I just automated it! I made a shell script that does just that:
+
+```zsh
+#!/bin/zsh
+
+# sorry windows and linux users, this is for mac only womp womp
+read "?Enter filename title: " title
+filename="$(date +%Y-%m-%d)-${title}.md"
+touch "$filename"
+echo "Created: $filename"
+echo "---
+title: ${title}
+date: $(date +%Y-%m-%d)
+description: <description>
+---
+# <site-title>" > "$filename"
+echo "Filled in template content."
+mv "$filename" "posts/markdown/"
+echo "Moved to posts/markdown directory."
+echo "Done! Access at posts/markdown/$filename"
+```
+
+Thank you Claude built into VSCode for about 99% of this code. Yes I'm a Mac user and no I don't care about Linux and Windows. If you want to use this code for some reason, you have ChatGPT to help convert it. It's just me on this project and I'm not trying to go unnessasarily overkill to make sure it works for Mac, and Windows, and all the 500,000+ distros of Linux. If you're someone important reading this, and I'm applying for something and I gave you this website to show you what I did, this is all just humour I have the ability to make it Windows and Linux compatible I'm just tactically focusing my efforts into the entire rest of the website, strategically overlooking this menial task.
+
+## Bye bye
+
+Yep that's it bye bye have a good day nothing else to this. It's late gotta sleep. Good night if night, good morning if morning, and good everything else.
