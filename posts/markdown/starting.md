@@ -1,10 +1,11 @@
 ---
 title: first blog post
-date: Monday December 22, 2025
+date: 2025-12-22
 description: Introducing the blog
 ---
 
 # first blog post!
+
 ## What is this?
 
 This is a place for me to store my projects and what I am working on. I need this because:

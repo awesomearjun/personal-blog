@@ -3,13 +3,23 @@ import { writeFile } from "fs/promises";
 import matter from "gray-matter";
 import * as marked from "marked";
 import path from "path";
-import { Post } from "../src/app/global";
-
+import { Post } from "../shared/global.js";
 
 const posts = fs.readdirSync(path.resolve(process.cwd(), "posts/markdown"));
+
+// sort by time created
+const sortedPosts = posts
+    .map(post => {
+        const fullPath = path.join(path.resolve(process.cwd(), "posts/markdown"), post);
+        const stats = fs.statSync(fullPath);
+        return { post, ctime: stats.birthtimeMs };
+    })
+    .sort((a, b) => b.ctime - a.ctime)
+    .map(post => post.post);
+
 let sites: Post[] = [];
 
-posts.forEach(async post => {
+sortedPosts.forEach(async post => {
     const file = matter.read(path.join(path.resolve(process.cwd(), "posts/markdown"), post));
     const htmlFileName = post.replace(".md", ".html");
     const htmlFilePath = path.resolve(process.cwd(), "src/assets/html", htmlFileName);

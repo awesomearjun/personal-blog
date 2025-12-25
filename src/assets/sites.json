@@ -1,10 +1,20 @@
 [
   {
+    "title": "Four Wheels and Links To Homepage",
+    "date": "2025-12-24T00:00:00.000Z",
+    "description": "My car officially has 4 wheels and I put links from my blogs to my homepage",
+    "path": "/assets/html/2025-12-24-four-wheels-and-links-to-homepage.html"
+  },
+  {
     "title": "Motors + Site Generator + JSON",
+    "date": "2025-12-23T00:00:00.000Z",
+    "description": "On my website, I made an automatic site generator and JSON file to store all sites. I also made an electrical project to make Raspberry PI + Arduino talk and move gear motors around.",
     "path": "/assets/html/2025-12-23-generator-json-motors.html"
   },
   {
     "title": "first blog post",
+    "date": "2025-12-22T00:00:00.000Z",
+    "description": "Introducing the blog",
     "path": "/assets/html/starting.html"
   }
 ]

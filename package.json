@@ -1,9 +1,9 @@
 {
-  "name": "buff",
+  "name": "personal-blog",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "parse": "ts-node scripts/parser.ts",
+    "parse": "ts-node --project tsconfig.backend.json backend/parser.ts",
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
@@ -30,6 +30,7 @@
     "@angular/forms": "^21.0.0",
     "@angular/platform-browser": "^21.0.0",
     "@angular/router": "^21.0.0",
+    "date-fns": "^4.1.0",
     "rxjs": "~7.8.0",
     "ts-node": "^10.9.2",
     "tslib": "^2.3.0"
@@ -38,6 +39,7 @@
     "@angular/build": "^21.0.4",
     "@angular/cli": "^21.0.4",
     "@angular/compiler-cli": "^21.0.0",
+    "@types/jest": "^30.0.0",
     "gray-matter": "^4.0.3",
     "jsdom": "^27.1.0",
     "marked": "^17.0.1",
