@@ -3,17 +3,19 @@ import { writeFile } from "fs/promises";
 import matter from "gray-matter";
 import * as marked from "marked";
 import path from "path";
+import { Post } from "../src/app/global";
+
 
 const posts = fs.readdirSync(path.resolve(process.cwd(), "posts/markdown"));
+let sites: Post[] = [];
 
 posts.forEach(async post => {
     const file = matter.read(path.join(path.resolve(process.cwd(), "posts/markdown"), post));
     const htmlFileName = post.replace(".md", ".html");
-    let sites: { [key: string]: string } = {};
-    const htmlFilePath = path.resolve(process.cwd(), "posts/html", htmlFileName);
+    const htmlFilePath = path.resolve(process.cwd(), "src/assets/html", htmlFileName);
 
     // Not a path to json, a path to the html file FOR the json entry
-    const jsonFilePath = `/${path.join(path.basename(process.cwd()), "posts/html", htmlFileName)}`;
+    const jsonFilePath = `/${path.join("assets/html", htmlFileName)}`;
 
     try {
         const html = `
@@ -24,18 +26,18 @@ posts.forEach(async post => {
                 <p>Description: ${file.data["description"]}</p>
             </fieldset>
             ${marked.parse(file.content)}
+
+            <a href="/">Go back home</a>
             `;
 
         await writeFile(htmlFilePath, html, { flag: "wx" });
 
-
-
-        sites[htmlFileName.replace(".html", "")] = jsonFilePath;
+        sites.push({ title: file.data["title"], date: file.data["date"], description: file.data["description"], path: jsonFilePath });
     } catch {
-        sites[htmlFileName.replace(".html", "")] = jsonFilePath;
+        sites.push({ title: file.data["title"], date: file.data["date"], description: file.data["description"], path: jsonFilePath });
     }
 
-    fs.writeFile(`${path.resolve(process.cwd(), "public/sites.json")}`, JSON.stringify(sites, null, 2), err => {
+    fs.writeFile(`${path.resolve(process.cwd(), "src/assets/sites.json")}`, JSON.stringify(sites, null, 2), err => {
         if (err) {
             console.error("Error writing to sites.json: ", err);
         }
