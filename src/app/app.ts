@@ -21,12 +21,16 @@ export class App {
     this.http.get<Post[]>(
       '/assets/sites.json'
     ).subscribe(data => {
-      this.posts.set(data);
+      for (let i = 0; i < data.length; i++) {
+        this.posts().splice(i, 0, { ...data[i], date: format(parseISO(data[i].date), 'MMMM dd, yyyy') });
+      }
+      console.table(this.posts());
     });
   }
 
-  trackByLink(index: number, link: Post) {
-    return link;
+  trackByPost(index: number, post: Post) {
+    console.table(post);
+    return post;
   }
 }
 
