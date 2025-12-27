@@ -1,11 +1,13 @@
 Here are my current blogs:
 
 <ul>
-  <fieldset *ngFor="let post of posts(); trackBy: trackByPost">
-    <legend>{{ post.date }}</legend>
-    <a [href]="post.path">{{ post.title }}</a>
-    <ul>
-      <li>{{ post.description }}</li>
-    </ul>
-  </fieldset>
+  <div class="post" *ngIf="posts().length > 0">
+    <fieldset *ngFor="let post of posts(); trackBy: trackByPost">
+      <legend>{{ post.date }}</legend>
+      <a [href]="post.path">{{ post.title }}</a>
+      <ul>
+        <li>{{ post.description }}</li>
+      </ul>
+    </fieldset>
+  </div>
 </ul>

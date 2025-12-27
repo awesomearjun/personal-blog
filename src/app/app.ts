@@ -19,18 +19,16 @@ export class App {
 
   ngOnInit() {
     this.http.get<Post[]>(
-      '/assets/sites.json'
+      `/assets/sites.json?v=${Date.now()}`
     ).subscribe(data => {
       for (let i = 0; i < data.length; i++) {
         this.posts().splice(i, 0, { ...data[i], date: format(parseISO(data[i].date), 'MMMM dd, yyyy') });
       }
-      console.table(this.posts());
     });
   }
 
   trackByPost(index: number, post: Post) {
-    console.table(post);
-    return post;
+    return post.title;
   }
 }
 
