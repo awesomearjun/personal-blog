@@ -1,5 +1,11 @@
 [
   {
+    "title": "first blog post",
+    "date": "2025-12-22T00:00:00.000Z",
+    "description": "Introducing the blog",
+    "path": "/assets/html/starting.html"
+  },
+  {
     "title": "finish-blog",
     "date": "2025-12-25T00:00:00.000Z",
     "description": "GUYS I TECHNICALLY FINISHED IT",
@@ -18,9 +24,15 @@
     "path": "/assets/html/2025-12-23-generator-json-motors.html"
   },
   {
-    "title": "first blog post",
-    "date": "2025-12-22T00:00:00.000Z",
-    "description": "Introducing the blog",
-    "path": "/assets/html/starting.html"
+    "title": "Controllabale Car",
+    "date": "2025-12-27T00:00:00.000Z",
+    "description": "The car is tamed!",
+    "path": "/assets/html/2025-12-27-controllabale-car.html"
+  },
+  {
+    "title": "car-body",
+    "date": "2025-12-26T00:00:00.000Z",
+    "description": "My car actually is a car",
+    "path": "/assets/html/2025-12-26-car-body.html"
   }
 ]
