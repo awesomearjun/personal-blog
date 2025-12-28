@@ -22,7 +22,10 @@ export class App {
       `/assets/sites.json?v=${Date.now()}`
     ).subscribe(data => {
       for (let i = 0; i < data.length; i++) {
-        this.posts().splice(i, 0, { ...data[i], date: format(parseISO(data[i].date), 'MMMM dd, yyyy') });
+        this.posts.set([
+          { ...data[i], date: format(parseISO(data[i].date), 'MMMM dd, yyyy') },
+          ...this.posts(),
+        ]);
       }
     });
   }
