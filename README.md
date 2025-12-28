@@ -1,6 +1,6 @@
 # Personal-blog
 
-WAIT, DON'T READ MY BLOG HERE 👎👎👎! Read it [here](https://personal-blog-seven-rosy.vercel.app/) 👍👍👍.
+WAIT, DON'T READ MY BLOG HERE 👎👎👎! Read it [here](https://arjuns-blog.vercel.app) 👍👍👍.
 
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.0.4 (and Node 24).
 
