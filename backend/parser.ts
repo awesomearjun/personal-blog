@@ -6,6 +6,7 @@ import path from "path";
 import { Post } from "../shared/global.js";
 
 const posts = fs.readdirSync(path.resolve(process.cwd(), "posts/markdown"));
+let uidCounter = 0;
 
 // sort by time created
 const sortedPosts = posts
@@ -14,7 +15,7 @@ const sortedPosts = posts
         const stats = fs.statSync(fullPath);
         return { post, ctime: stats.birthtimeMs };
     })
-    .sort((a, b) => b.ctime - a.ctime)
+    .sort((a, b) => a.ctime - b.ctime)
     .map(post => post.post);
 
 let sites: Post[] = [];
@@ -42,9 +43,9 @@ sortedPosts.forEach(async post => {
 
         await writeFile(htmlFilePath, html, { flag: "wx" });
 
-        sites.push({ title: file.data["title"], date: file.data["date"], description: file.data["description"], path: jsonFilePath });
+        sites.push({ uid: uidCounter++, title: file.data["title"], date: file.data["date"], description: file.data["description"], path: jsonFilePath });
     } catch {
-        sites.push({ title: file.data["title"], date: file.data["date"], description: file.data["description"], path: jsonFilePath });
+        sites.push({ uid: uidCounter++, title: file.data["title"], date: file.data["date"], description: file.data["description"], path: jsonFilePath });
     }
 
     fs.writeFile(`${path.resolve(process.cwd(), "src/assets/sites.json")}`, JSON.stringify(sites, null, 2), err => {
