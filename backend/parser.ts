@@ -4,11 +4,8 @@ import matter from "gray-matter";
 import * as marked from "marked";
 import path from "path";
 import { Post } from "../shared/global.js";
-import { parseISO } from "date-fns";
-import { of } from "rxjs";
 
 const posts = fs.readdirSync(path.resolve(process.cwd(), "posts/markdown"));
-let uidCounter = 0;
 
 // sort by time created
 const sortedPosts = posts
