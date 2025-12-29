@@ -1,5 +1,6 @@
 ---
 title: Motors + Site Generator + JSON
+slug: motors-site-generator-json
 date: 2025-12-23
 description: On my website, I made an automatic site generator and JSON file to store all sites. I also made an electrical project to make Raspberry PI + Arduino talk and move gear motors around.
 ---

@@ -6,7 +6,8 @@ filename="$(date +%Y-%m-%d)-${title}.md"
 touch "$filename"
 echo "Created: $filename"
 echo "---
-title: ${title}
+title: <title>
+slug: $filename
 date: $(date +%Y-%m-%d)
 description: <description>
 ---

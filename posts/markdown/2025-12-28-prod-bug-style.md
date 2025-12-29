@@ -1,5 +1,6 @@
 ---
 title: Prod bug & style
+slug: prod-bug-style
 date: 2025-12-28
 description: Fixed site prod bug and tried to do a little style
 ---

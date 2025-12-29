@@ -1,5 +1,6 @@
 ---
 title: finish-blog
+slug: finish-blog
 date: 2025-12-25
 description: GUYS I TECHNICALLY FINISHED IT
 ---

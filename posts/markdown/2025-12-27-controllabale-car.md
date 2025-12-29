@@ -1,5 +1,6 @@
 ---
 title: Controllabale Car
+slug: controllable-car
 date: 2025-12-27
 description: The car is tamed!
 ---

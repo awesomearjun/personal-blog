@@ -1,5 +1,6 @@
 ---
 title: first blog post
+slug: first-blog-post
 date: 2025-12-22
 description: Introducing the blog
 ---

@@ -1,5 +1,6 @@
 ---
 title: Four Wheels and Links To Homepage
+slug: four-wheels-and-links-to-homepage
 date: 2025-12-24
 description: My car officially has 4 wheels and I put links from my blogs to my homepage
 ---
