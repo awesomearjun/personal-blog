@@ -1,13 +1,7 @@
-Here are my current blogs:
+<header>
+  <h1 class="blog-title">Arjun's Blog</h1>
+</header>
 
-<ul>
-  @for (post of posts(); track post.uid) {
-    <fieldset>
-      <legend>{{ post.date }}</legend>
-      <a [href]="post.path">{{ post.title }}</a>
-      <ul>
-        <li>{{ post.description }}</li>
-      </ul>
-    </fieldset>
-  }
-</ul>
+<main>
+  <router-outlet></router-outlet>
+</main>
