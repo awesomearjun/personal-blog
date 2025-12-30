@@ -1,41 +1,55 @@
 [
   {
+    "uid": 0,
+    "slug": "first-blog-post",
     "title": "first blog post",
     "date": "2025-12-22T00:00:00.000Z",
     "description": "Introducing the blog",
     "path": "/assets/html/starting.html"
   },
   {
-    "title": "Controllabale Car",
-    "date": "2025-12-27T00:00:00.000Z",
-    "description": "The car is tamed!",
-    "path": "/assets/html/2025-12-27-controllabale-car.html"
-  },
-  {
-    "title": "car-body",
-    "date": "2025-12-26T00:00:00.000Z",
-    "description": "My car actually is a car",
-    "path": "/assets/html/2025-12-26-car-body.html"
-  },
-  {
-    "title": "finish-blog",
-    "date": "2025-12-25T00:00:00.000Z",
-    "description": "GUYS I TECHNICALLY FINISHED IT",
-    "path": "/assets/html/2025-12-25-finish-blog.html"
-  },
-  {
-    "title": "Four Wheels and Links To Homepage",
-    "date": "2025-12-24T00:00:00.000Z",
-    "description": "My car officially has 4 wheels and I put links from my blogs to my homepage",
-    "path": "/assets/html/2025-12-24-four-wheels-and-links-to-homepage.html"
-  },
-  {
+    "uid": 1,
+    "slug": "motors-site-generator-json",
     "title": "Motors + Site Generator + JSON",
     "date": "2025-12-23T00:00:00.000Z",
     "description": "On my website, I made an automatic site generator and JSON file to store all sites. I also made an electrical project to make Raspberry PI + Arduino talk and move gear motors around.",
     "path": "/assets/html/2025-12-23-generator-json-motors.html"
   },
   {
+    "uid": 2,
+    "slug": "four-wheels-and-links-to-homepage",
+    "title": "Four Wheels and Links To Homepage",
+    "date": "2025-12-24T00:00:00.000Z",
+    "description": "My car officially has 4 wheels and I put links from my blogs to my homepage",
+    "path": "/assets/html/2025-12-24-four-wheels-and-links-to-homepage.html"
+  },
+  {
+    "uid": 3,
+    "slug": "finish-blog",
+    "title": "finish-blog",
+    "date": "2025-12-25T00:00:00.000Z",
+    "description": "GUYS I TECHNICALLY FINISHED IT",
+    "path": "/assets/html/2025-12-25-finish-blog.html"
+  },
+  {
+    "uid": 4,
+    "slug": "car-body",
+    "title": "car-body",
+    "date": "2025-12-26T00:00:00.000Z",
+    "description": "My car actually is a car",
+    "path": "/assets/html/2025-12-26-car-body.html"
+  },
+  {
+    "uid": 5,
+    "slug": "controllable-car",
+    "title": "Controllabale Car",
+    "date": "2025-12-27T00:00:00.000Z",
+    "description": "The car is tamed!",
+    "path": "/assets/html/2025-12-27-controllabale-car.html"
+  },
+  {
+    "uid": 6,
+    "slug": "prod-bug-style",
     "title": "Prod bug & style",
     "date": "2025-12-28T00:00:00.000Z",
     "description": "Fixed site prod bug and tried to do a little style",

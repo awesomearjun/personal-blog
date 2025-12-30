@@ -1,0 +1,13 @@
+Here are my current blogs:
+
+<ul>
+  @for (post of posts(); track post.uid) {
+    <fieldset>
+      <legend>{{ post.date }}</legend>
+      <a [routerLink]="['/post', post.slug]">{{ post.title }}</a>
+      <ul>
+        <li>{{ post.description }}</li>
+      </ul>
+    </fieldset>
+  }
+</ul>
