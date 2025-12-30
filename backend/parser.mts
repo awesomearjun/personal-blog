@@ -28,12 +28,6 @@ for (const post of sortedPosts) {
     const jsonFilePath = `/${path.join("assets/html", htmlFileName)}`;
 
     const html = `
-        <fieldset>
-            <legend>Metadata</legend>
-            <p>Title: ${file.data["title"]}</p>
-            <p>Date: ${file.data["date"]}</p>
-            <p>Description: ${file.data["description"]}</p>
-        </fieldset>
         ${marked.parse(file.content)}
 
         <a href="/">Go back home</a>
