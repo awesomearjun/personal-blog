@@ -3,7 +3,7 @@ import { writeFile } from "fs/promises";
 import matter from "gray-matter";
 import * as marked from "marked";
 import path from "path";
-import { Post } from "../shared/global.js";
+import type { Post } from "../shared/global.ts";
 
 const posts = fs.readdirSync(path.resolve(process.cwd(), "posts/markdown"));
 
@@ -40,16 +40,14 @@ for (const post of sortedPosts) {
         `;
 
     try {
-        fs.accessSync(htmlFilePath, fs.constants.W_OK);
+        await writeFile(htmlFilePath, html, { flag: "wx" });
     }
     catch {
-        sites.push({ uid: 0, title: file.data["title"], date: file.data["date"], description: file.data["description"], path: jsonFilePath });
+        sites.push({ uid: 0, slug: file.data["slug"], title: file.data["title"], date: file.data["date"], description: file.data["description"], path: jsonFilePath });
+        continue;
     }
 
-    fs.writeFile(htmlFilePath, html, err => { throw err });
-
-    sites.push({ uid: 0, title: file.data["title"], date: file.data["date"], description: file.data["description"], path: jsonFilePath });
-
+    sites.push({ uid: 0, slug: file.data["slug"], title: file.data["title"], date: file.data["date"], description: file.data["description"], path: jsonFilePath });
 };
 
 sites.sort((a, b) => {
