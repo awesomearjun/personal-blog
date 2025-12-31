@@ -1,13 +1,13 @@
-Here are my current blogs:
+<h2>Here are my current blogs:</h2>
 
 <ul>
   @for (post of posts(); track post.uid) {
-    <fieldset>
-      <legend>{{ post.date }}</legend>
-      <a [routerLink]="['/post', post.slug]">{{ post.title }}</a>
-      <ul>
-        <li>{{ post.description }}</li>
-      </ul>
-    </fieldset>
+    <a [routerLink]="['/post', post.slug]">
+      <article class="post">
+        <p>{{ post.date }}</p>
+        <h3>{{ post.title }}</h3>
+        <h4>{{ post.description }}</h4>
+      </article>
+    </a>
   }
 </ul>
