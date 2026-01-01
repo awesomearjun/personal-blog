@@ -6,6 +6,24 @@ import path from "path";
 import type { Post } from "../shared/global.ts";
 
 const posts = fs.readdirSync(path.resolve(process.cwd(), "posts/markdown"));
+let renderer = new marked.Renderer();
+renderer.heading = ({ tokens, depth }) => {
+    const text: string = renderer.parser.parseInline(tokens);
+    const depthClasses: { [key: number]: string; } = {
+        1: "blog-title",
+        2: "blog-subtitle",
+        3: "blog-extra",
+    };
+
+    return `<h${depth} class=${depthClasses[depth]}>${text}</h${depth}>`;
+};
+
+renderer.paragraph = ({ tokens }) => {
+    const text: string = renderer.parser.parseInline(tokens);
+    return `<p class="blog-paragraph">${text}</p>`;
+}
+
+marked.use({ renderer })
 
 // sort by time created
 const sortedPosts = posts
@@ -28,20 +46,24 @@ for (const post of sortedPosts) {
     const jsonFilePath = `/${path.join("assets/html", htmlFileName)}`;
 
     const html = `
-        ${marked.parse(file.content)}
+        ${marked.parse(file.content, { renderer })}
 
         <a href="/">Go back home</a>
         `;
 
     try {
         await writeFile(htmlFilePath, html, { flag: "wx" });
+        console.log(`Created file ${htmlFileName}`);
+
     }
     catch {
         sites.push({ uid: 0, slug: file.data["slug"], title: file.data["title"], date: file.data["date"], description: file.data["description"], path: jsonFilePath });
+        console.log(`didn't Created file ${htmlFilePath}`);
         continue;
     }
 
     sites.push({ uid: 0, slug: file.data["slug"], title: file.data["title"], date: file.data["date"], description: file.data["description"], path: jsonFilePath });
+    console.log("added file");
 };
 
 sites.sort((a, b) => {

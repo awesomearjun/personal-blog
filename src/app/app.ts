@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { RouterOutlet, } from '@angular/router';
+import { HeaderService } from './header-service';
 
 @Component({
   selector: 'app-root',
@@ -9,6 +10,6 @@ import { RouterOutlet, } from '@angular/router';
   styleUrl: './app.css'
 })
 export class App {
-
+  header = inject(HeaderService);
 }
 
