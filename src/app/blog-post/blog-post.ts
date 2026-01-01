@@ -9,7 +9,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 @Component({
   selector: 'app-blog-post',
   imports: [CommonModule],
-  template: '<div [innerHTML]="content()"></div>',
+  templateUrl: './blog-post.html',
   styleUrl: './blog-post.css',
 })
 export class BlogPost {

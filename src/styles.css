@@ -4,3 +4,15 @@ body {
     color: #E4E5E7;
     text-align: center;
 }
+
+.blog-subtitle {
+    margin-top: 3rem;
+    margin-bottom: 0.75rem;
+    font-size: 1.5rem;
+    font-weight: 1000;
+}
+
+.blog-extra {
+    margin-top: 1rem;
+    font-weight: 500;
+}
