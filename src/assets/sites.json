@@ -54,5 +54,13 @@
     "date": "2025-12-28T00:00:00.000Z",
     "description": "Fixed site prod bug and tried to do a little style",
     "path": "/assets/html/2025-12-28-prod-bug-style.html"
+  },
+  {
+    "uid": 7,
+    "slug": "seo-style",
+    "title": "Site SEO + Styles",
+    "date": "2026-01-01T00:00:00.000Z",
+    "description": "<description>",
+    "path": "/assets/html/2026-01-01-seo-styles.html"
   }
 ]

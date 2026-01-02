@@ -7,7 +7,7 @@ touch "$filename"
 echo "Created: $filename"
 echo "---
 title: <title>
-slug: $filename
+slug: $title
 date: $(date +%Y-%m-%d)
 description: <description>
 ---
