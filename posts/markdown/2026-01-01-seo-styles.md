@@ -2,7 +2,7 @@
 title: Site SEO + Styles
 slug: seo-style
 date: 2026-01-01
-description: <description>
+description: Made SEO better and styled the site a little
 ---
 
 # Site SEO + Styles
