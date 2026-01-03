@@ -1,8 +1,34 @@
-
-        <h1 class=blog-title>Site SEO + Styles</h1><p class="blog-paragraph">HAPPY NEW YEARS 🎉🎉🎉<br>
-Sorry I didn&#39;t post, kinda either forgot or it was too close to my bedtime, I&#39;ll get back on the grind. That&#39;s not to say I didn&#39;t work on this project though. The work I did was quite a bit, although it takes a few words to explain. I keep forgetting to order the parts for the project, mostly because I don&#39;t know <em>what</em> to order (posted a <a href="https://www.reddit.com/r/AskRobotics/comments/1q1ba4b/power_source_structure/">reddit question</a>, help if you can).</p><h2 class=blog-subtitle>Website SEO</h2><p class="blog-paragraph">Firstly, if you look at the top of your site, you should see a nice, elegant URL. Should along the lines of <code>/post/</code>, followed by a glamourous slug (in this case <code>seo-styles</code>). This is better for SEO than just the raw HTML filenames as before. The way I made this URL was through Angular routing (god I love Angular).</p><h3 class=blog-extra>SEO</h3><p class="blog-paragraph">So basically I had to change my last setup (which was a bunch of html files stored in a folder), to one that has each component as a page. This was kinda hard though, because the way I go about blog posts is as such: first, I write in markdown because it&#39;s easy to use and visualize, second I run a script that turns it into HTML, third I use Angular&#39;s HTTP library to get the HTML from my filesystem. So like, if my sites are in HTML files, how am I supposed to turn them into components?<br></p><p class="blog-paragraph">The way I did it was by first creating a <code>blog-post</code> component, and then in the component&#39;s template (aka the html for the component) I put a <code>div</code>, and property binded the attribute <code>innerHTML</code> to a signal containing my actual blog&#39;s HTML. Like so:</p><pre><code>&lt;div [innerHTML]=&quot;content&quot;&gt;&lt;/div&gt;
-</code></pre>
-<p class="blog-paragraph">For all you non angular users, I&#39;ll dumbify it: a signal is a reactive variable, when it changes everything else using it changes; property binding is just if you have an attribute in HTML and you want it to connect to a variable (like <code>innerHTML</code> connects to <code>content</code>)<br></p><h3 class=blog-extra>Styling</h3><p class="blog-paragraph">Yeah I just let my copilot in VSCode just write it out. Nothing to it, just a <code>tab</code>. These are just placeholder styles though, it&#39;s a mere shadow of what it&#39;s going to look like</p><h2 class=blog-subtitle>Ending</h2><p class="blog-paragraph">I did my blog before dinner! That&#39;s time-management and responsibility right there. Starting off 2026 semi-strong. Good night, good morning, and good whatever else&#39;s outside your window.</p>
-
-        <a href="/">Go back home</a>
-        
+<article>
+            <header>
+                <h1>Site SEO + Styles</h1>
+            </header>
+            
+            <p>HAPPY NEW YEARS 🎉🎉🎉<br>
+Sorry I didn't post, kinda either forgot or it was too close to my bedtime, I'll get back on the grind. That's not to say I didn't work on this project though. The work I did was quite a bit, although it takes a few words to explain. I keep forgetting to order the parts for the project, mostly because I don't know _what_ to order (posted a [reddit question](https://www.reddit.com/r/AskRobotics/comments/1q1ba4b/power_source_structure/), help if you can).</p>
+            <section aria-label="Website SEO">
+                <header>
+                    <h2>Website SEO</h2>
+                </header>
+            <p>Firstly, if you look at the top of your site, you should see a nice, elegant URL. Should along the lines of `/post/`, followed by a glamourous slug (in this case `seo-styles`). This is better for SEO than just the raw HTML filenames as before. The way I made this URL was through Angular routing (god I love Angular).</p>
+                <section aria-label="SEO">
+                    <header>
+                        <h3>SEO</h3>
+                    </header>
+            <p>So basically I had to change my last setup (which was a bunch of html files stored in a folder), to one that has each component as a page. This was kinda hard though, because the way I go about blog posts is as such: first, I write in markdown because it's easy to use and visualize, second I run a script that turns it into HTML, third I use Angular's HTTP library to get the HTML from my filesystem. So like, if my sites are in HTML files, how am I supposed to turn them into components?<br></p>
+            <p>The way I did it was by first creating a `blog-post` component, and then in the component's template (aka the html for the component) I put a `div`, and property binded the attribute `innerHTML` to a signal containing my actual blog's HTML. Like so:</p>
+            <pre><code><div [innerHTML]="content"></div></code></pre>
+            <p>For all you non angular users, I'll dumbify it: a signal is a reactive variable, when it changes everything else using it changes; property binding is just if you have an attribute in HTML and you want it to connect to a variable (like `innerHTML` connects to `content`)<br></p>
+                </section>
+                <section aria-label="Styling">
+                    <header>
+                        <h3>Styling</h3>
+                    </header>
+            <p>Yeah I just let my copilot in VSCode just write it out. Nothing to it, just a `tab`. These are just placeholder styles though, it's a mere shadow of what it's going to look like</p>
+            </section>
+            <section aria-label="Ending">
+                <header>
+                    <h2>Ending</h2>
+                </header>
+            <p>I did my blog before dinner! That's time-management and responsibility right there. Starting off 2026 semi-strong. Good night, good morning, and good whatever else's outside your window.</p>
+    </section>
+    </article>
