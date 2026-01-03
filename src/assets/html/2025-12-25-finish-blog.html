@@ -1,5 +1,29 @@
-
-        <h1 class=blog-title>Finish blog</h1><p class="blog-paragraph">Sorry for short blog, kinda felt lazy today. Didn&#39;t work on electrical project because it&#39;s at the stage where I actually <em>have</em> to build a car using a material such as cardboard, so I just worked on the blog.</p><h2 class=blog-subtitle>Blog</h2><p class="blog-paragraph">So as a refresher, last time I broke my markdown parser (I type sites in markdown because it&#39;s easy and light, then I have a script to convert that to HTML) because of some kinda &quot;import&quot; issue. The way I fixed it in a nutshell: seperate <code>tsconfig</code>s, and better file structure.</p><h3 class=blog-extra>What was happening</h3><p class="blog-paragraph">I wanted to have a post interface to have an actual data type to store my posts, and also so I can get that sweet sweet TypeScript intellesense. So, I make a global file to store the interface because both my Angular project and my parser on the backend needed to access it.</p><p class="blog-paragraph">The problem was that Angular and Node (technically ts-node) import stuff differently. Angular does all the import stuff for you, but only works within <code>src/</code> (what I mean is when you try to import a custom standalone TypeScript file, you don&#39;t need the extension), and Node (technically ts-node) most of the time likes to have their imports as <code>.js</code>, because it gets compiled to JavaScript. Also, Angular has a setting in their <code>tsconfig</code> that I don&#39;t know what the heck it does but it sure does cause problems for what I want to do (I&#39;m talking about <code>module: preserve</code>).</p><p class="blog-paragraph">UPDATE: I just went on the TypeScript docs (quick question: when&#39;s the last time you went on a language <strong>doc</strong>). Apparently, <code>module: preserve</code> is for bundled code (which is Angular, pretty sure that means that the code comes together to be hyper-efficient, and it can take <code>require()</code> or <code>import</code> but no one uses <code>require()</code>).</p><p class="blog-paragraph">What I needed for my backend was <code>module: nodenext</code>, but editing the default <code>tsconfig</code> destroyed Angular (I&#39;m talking errors so big you need a vertical monitor). So after a bunch of unnessasary scrambling for a solution, I came across a very simple and easy solution: just make two <code>tsconfig</code>s (gosh I know some advanced god non-vibe coder is reading this and probably getting so bored)!</p><p class="blog-paragraph">So yeah, that&#39;s all I did today. Made a <code>tsconfig</code> for the backend specifically and ran the parser through the it. But hey, it&#39;s more about the quality of your work than your quantity!</p><p class="blog-paragraph">What does this finally mean: I can technically publish this website (going to do it on Vercel for the first time because my <strong>PAST</strong> bestie Netlify isn&#39;t letting me sign in 😡).</p><h2 class=blog-subtitle>Ending</h2><p class="blog-paragraph">Yup, that&#39;s it. I made a blog post before dinner, so that&#39;s good. Usually keeps me up past my bedtime a little. Good night, good morning, good anything else. I&#39;mma go try to speedrun Minecraft.</p>
-
-        <a href="/">Go back home</a>
-        
+<article>
+            <header>
+                <h1>Finish blog</h1>
+            </header>
+            
+            <p>Sorry for short blog, kinda felt lazy today. Didn't work on electrical project because it's at the stage where I actually _have_ to build a car using a material such as cardboard, so I just worked on the blog.</p>
+            <section aria-label="Blog">
+                <header>
+                    <h2>Blog</h2>
+                </header>
+            <p>So as a refresher, last time I broke my markdown parser (I type sites in markdown because it's easy and light, then I have a script to convert that to HTML) because of some kinda "import" issue. The way I fixed it in a nutshell: seperate `tsconfig`s, and better file structure.</p>
+                <section aria-label="What was happening">
+                    <header>
+                        <h3>What was happening</h3>
+                    </header>
+            <p>I wanted to have a post interface to have an actual data type to store my posts, and also so I can get that sweet sweet TypeScript intellesense. So, I make a global file to store the interface because both my Angular project and my parser on the backend needed to access it.</p>
+            <p>The problem was that Angular and Node (technically ts-node) import stuff differently. Angular does all the import stuff for you, but only works within `src/` (what I mean is when you try to import a custom standalone TypeScript file, you don't need the extension), and Node (technically ts-node) most of the time likes to have their imports as `.js`, because it gets compiled to JavaScript. Also, Angular has a setting in their `tsconfig` that I don't know what the heck it does but it sure does cause problems for what I want to do (I'm talking about `module: preserve`).</p>
+            <p>UPDATE: I just went on the TypeScript docs (quick question: when's the last time you went on a language **doc**). Apparently, `module: preserve` is for bundled code (which is Angular, pretty sure that means that the code comes together to be hyper-efficient, and it can take `require()` or `import` but no one uses `require()`).</p>
+            <p>What I needed for my backend was `module: nodenext`, but editing the default `tsconfig` destroyed Angular (I'm talking errors so big you need a vertical monitor). So after a bunch of unnessasary scrambling for a solution, I came across a very simple and easy solution: just make two `tsconfig`s (gosh I know some advanced god non-vibe coder is reading this and probably getting so bored)!</p>
+            <p>So yeah, that's all I did today. Made a `tsconfig` for the backend specifically and ran the parser through the it. But hey, it's more about the quality of your work than your quantity!</p>
+            <p>What does this finally mean: I can technically publish this website (going to do it on Vercel for the first time because my **PAST** bestie Netlify isn't letting me sign in 😡).</p>
+            </section>
+            <section aria-label="Ending">
+                <header>
+                    <h2>Ending</h2>
+                </header>
+            <p>Yup, that's it. I made a blog post before dinner, so that's good. Usually keeps me up past my bedtime a little. Good night, good morning, good anything else. I'mma go try to speedrun Minecraft.</p>
+    </section>
+    </article>
