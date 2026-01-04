@@ -7,7 +7,7 @@ import type { Post } from "../shared/global.ts";
 import minimist from "minimist";
 
 const posts = fs.readdirSync(path.resolve(process.cwd(), "posts/markdown"));
-const regen = minimist(process.argv.splice(2)).regen ?? false;
+const regen = minimist(process.argv.slice(2)).regen ?? false;
 const imgFolder = path.resolve(process.cwd(), "posts/assets");
 const newImgFolder = path.resolve(process.cwd(), "src/assets/postAssets");
 
