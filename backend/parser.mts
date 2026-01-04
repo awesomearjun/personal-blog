@@ -4,26 +4,16 @@ import matter from "gray-matter";
 import * as marked from "marked";
 import path from "path";
 import type { Post } from "../shared/global.ts";
+import minimist from "minimist"
 
 const posts = fs.readdirSync(path.resolve(process.cwd(), "posts/markdown"));
-let renderer = new marked.Renderer();
-renderer.heading = ({ tokens, depth }) => {
-    const text: string = renderer.parser.parseInline(tokens);
-    const depthClasses: { [key: number]: string; } = {
-        1: "blog-title",
-        2: "blog-subtitle",
-        3: "blog-extra",
-    };
+const regen = minimist(process.argv.splice(2)).regen ?? false;
+const imgFolder = path.resolve(process.cwd(), "posts/assets");
+const newImgFolder = path.resolve(process.cwd(), "src/assets/postAssets");
 
-    return `<h${depth} class=${depthClasses[depth]}>${text}</h${depth}>`;
-};
-
-renderer.paragraph = ({ tokens }) => {
-    const text: string = renderer.parser.parseInline(tokens);
-    return `<p class="blog-paragraph">${text}</p>`;
+if (!fs.existsSync(newImgFolder)) {
+    fs.cpSync(imgFolder, newImgFolder, { recursive: true });
 }
-
-marked.use({ renderer })
 
 // sort by time created
 const sortedPosts = posts
@@ -48,15 +38,20 @@ for (const post of sortedPosts) {
 
     const html = makeSEO(tokens, post);
 
-    try {
-        await writeFile(htmlFilePath, html, { flag: "wx" });
-        // console.log(`Created file ${htmlFileName}`);
+    if (!regen) {
+        try {
+            await writeFile(htmlFilePath, html, { flag: "wx" });
+            // console.log(`Created file ${htmlFileName}`);
 
+        }
+        catch {
+            sites.push({ uid: 0, slug: file.data["slug"], title: file.data["title"], date: file.data["date"], description: file.data["description"], path: jsonFilePath });
+            // console.log(`didn't Created file ${htmlFilePath}`);
+            continue;
+        }
     }
-    catch {
-        sites.push({ uid: 0, slug: file.data["slug"], title: file.data["title"], date: file.data["date"], description: file.data["description"], path: jsonFilePath });
-        // console.log(`didn't Created file ${htmlFilePath}`);
-        continue;
+    else {
+        await writeFile(htmlFilePath, html)
     }
 
     sites.push({ uid: 0, slug: file.data["slug"], title: file.data["title"], date: file.data["date"], description: file.data["description"], path: jsonFilePath });
@@ -146,8 +141,18 @@ function makeSEO(tokens: marked.TokensList, postPath: string): string {
         }
 
         if (token.type === "paragraph") {
-            site = `${site}
-            <p>${token.text}</p>`
+            if (token.tokens === undefined) {
+                site += marked.parser([token]);
+                continue;
+            }
+
+            const imgSubTokens = token.tokens.filter(t => t.type === "image")
+
+            for (const imgSubToken of imgSubTokens) {
+                imgSubToken.href = path.join("/assets/postAssets", path.basename(imgSubToken.href));
+            }
+
+            site += marked.parser([token]);
             continue;
         }
         if (token.type === "code") {
