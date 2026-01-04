@@ -153,9 +153,7 @@ function makeSEO(tokens: marked.TokensList, postPath: string): string {
             const imgSubTokens = token.tokens.filter(t => t.type === "image");
 
             for (const imgSubToken of imgSubTokens) {
-                for (const imgSubToken of imgSubTokens) {
-                    imgSubToken.href = `/assets/postAssets/${path.basename(imgSubToken.href)}`;
-                }
+                imgSubToken.href = `/assets/postAssets/${path.basename(imgSubToken.href)}`;
             }
 
             site += marked.parser([token]);
