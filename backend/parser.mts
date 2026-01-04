@@ -44,21 +44,22 @@ for (const post of sortedPosts) {
     if (!regen) {
         try {
             await writeFile(htmlFilePath, html, { flag: "wx" });
-            // console.log(`Created file ${htmlFileName}`);
-
         }
         catch {
             sites.push({ uid: 0, slug: file.data["slug"], title: file.data["title"], date: file.data["date"], description: file.data["description"], path: jsonFilePath });
-            // console.log(`didn't Created file ${htmlFilePath}`);
             continue;
         }
     }
     else {
-        await writeFile(htmlFilePath, html)
+        try {
+            await writeFile(htmlFilePath, html);
+        }
+        catch (err) {
+            throw new Error(`Error rewriting file: ${err}`);
+        }
     }
 
     sites.push({ uid: 0, slug: file.data["slug"], title: file.data["title"], date: file.data["date"], description: file.data["description"], path: jsonFilePath });
-    // console.log("added file");
 };
 
 sites.sort((a, b) => {
