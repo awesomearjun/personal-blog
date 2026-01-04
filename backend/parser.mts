@@ -4,7 +4,7 @@ import matter from "gray-matter";
 import * as marked from "marked";
 import path from "path";
 import type { Post } from "../shared/global.ts";
-import minimist from "minimist"
+import minimist from "minimist";
 
 const posts = fs.readdirSync(path.resolve(process.cwd(), "posts/markdown"));
 const regen = minimist(process.argv.splice(2)).regen ?? false;
