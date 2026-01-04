@@ -11,7 +11,10 @@ const regen = minimist(process.argv.splice(2)).regen ?? false;
 const imgFolder = path.resolve(process.cwd(), "posts/assets");
 const newImgFolder = path.resolve(process.cwd(), "src/assets/postAssets");
 
-if (!fs.existsSync(newImgFolder)) {
+if (!fs.existsSync(newImgFolder) || regen) {
+    if (fs.existsSync(newImgFolder) && regen) {
+        fs.rmSync(newImgFolder, { recursive: true });
+    }
     fs.cpSync(imgFolder, newImgFolder, { recursive: true });
 }
 
