@@ -149,7 +149,7 @@ function makeSEO(tokens: marked.TokensList, postPath: string): string {
                 continue;
             }
 
-            const imgSubTokens = token.tokens.filter(t => t.type === "image")
+            const imgSubTokens = token.tokens.filter(t => t.type === "image");
 
             for (const imgSubToken of imgSubTokens) {
                 for (const imgSubToken of imgSubTokens) {
