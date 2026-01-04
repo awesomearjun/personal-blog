@@ -40,9 +40,11 @@
     "@angular/cli": "^21.0.4",
     "@angular/compiler-cli": "^21.0.0",
     "@types/jest": "^30.0.0",
+    "@types/minimist": "^1.2.5",
     "gray-matter": "^4.0.3",
     "jsdom": "^27.1.0",
     "marked": "^17.0.1",
+    "minimist": "^1.2.8",
     "typescript": "~5.9.2",
     "vitest": "^4.0.8"
   }
