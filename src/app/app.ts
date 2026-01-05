@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { RouterOutlet, } from '@angular/router';
 import { HeaderService } from './header-service';
+import { FooterService } from './footer-service';
 
 @Component({
   selector: 'app-root',
@@ -11,5 +12,6 @@ import { HeaderService } from './header-service';
 })
 export class App {
   header = inject(HeaderService);
+  footer = inject(FooterService)
 }
 

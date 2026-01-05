@@ -1,8 +1,12 @@
 <header>
-  <span class="site-title">{{ header.header() }}</span>
-  <h1 class="site-subtitle">{{ header.subTitle() }}</h1>
+  <h1 id="blog-title">{{ header.header() }}</h1>
+  <p id="blog-subtitle">{{ header.subTitle() }}</p>
 </header>
 
 <main>
   <router-outlet></router-outlet>
 </main>
+
+<footer>
+  <p id="blog-footer">{{ footer.footer() }}</p>
+</footer>
