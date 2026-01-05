@@ -10,6 +10,13 @@ const posts = fs.readdirSync(path.resolve(process.cwd(), "posts/markdown"));
 const regen = minimist(process.argv.slice(2)).regen ?? false;
 const imgFolder = path.resolve(process.cwd(), "posts/assets");
 const newImgFolder = path.resolve(process.cwd(), "src/assets/postAssets");
+const newSitesFolder = path.resolve(process.cwd(), "src/assets/html")
+const assetsFolder = path.resolve(process.cwd(), "src/assets")
+
+// no checks because it should exist anyway
+if (!fs.existsSync(assetsFolder)) {
+    fs.mkdirSync(assetsFolder);
+}
 
 if (!fs.existsSync(newImgFolder) || regen) {
     if (fs.existsSync(newImgFolder) && regen) {
@@ -18,6 +25,13 @@ if (!fs.existsSync(newImgFolder) || regen) {
     fs.cpSync(imgFolder, newImgFolder, { recursive: true });
 }
 
+if (!fs.existsSync(newSitesFolder) || regen) {
+    if (fs.existsSync(newSitesFolder) && regen) {
+        fs.rmSync(newSitesFolder, { recursive: true });
+    }
+
+    fs.mkdirSync(newSitesFolder);
+}
 // sort by time created
 const sortedPosts = posts
     .map(post => {
