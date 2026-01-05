@@ -1,15 +1,16 @@
 import { Component, inject, signal } from '@angular/core';
 import { Post } from '../../../shared/global';
 import { CommonModule } from '@angular/common';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 import { PostFetcher } from '../post-fetcher';
 import { HttpClient } from '@angular/common/http';
 import { Title, Meta } from '@angular/platform-browser';
 import { DomSanitizer } from '@angular/platform-browser';
+import { HeaderService } from '../header-service';
 
 @Component({
   selector: 'app-blog-post',
-  imports: [CommonModule],
+  imports: [CommonModule, RouterLink],
   templateUrl: './blog-post.html',
   styleUrl: './blog-post.css',
 })
@@ -20,12 +21,15 @@ export class BlogPost {
   private sanitizer = inject(DomSanitizer);
   private title = inject(Title);
   private meta = inject(Meta);
+  private header = inject(HeaderService)
   posts = signal<Post[]>([]);
   slug!: string;
 
   content = signal<string>('');
 
   ngOnInit() {
+    this.header.header.set("");
+    this.header.subTitle.set("");
     this.route.paramMap.subscribe(params => {
       this.slug = params.get('slug')!;
 
