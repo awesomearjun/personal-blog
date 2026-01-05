@@ -1,5 +1,3 @@
-<h2>Here are my current blogs:</h2>
-
 <ul>
   @for (post of posts(); track post.uid) {
     <a [routerLink]="['/post', post.slug]">

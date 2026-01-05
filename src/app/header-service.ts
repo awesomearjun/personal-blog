@@ -4,6 +4,6 @@ import { Injectable, signal } from '@angular/core';
   providedIn: 'root',
 })
 export class HeaderService {
-  header = signal<string>("Arjun's Blog");
-  subTitle = signal<string>("me just trying to code stuff");
+  header = signal<string>("Arjun's Prologue");
+  subTitle = signal<string>("getting stuff done");
 }
