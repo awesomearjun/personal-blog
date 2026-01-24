@@ -1,36 +1,18 @@
-/* You can add global styles to this file, and also import other style files */
 body {
-    background-color: #111113;
-    color: #E4E5E7;
-    text-align: center;
+    margin: 0;
+    padding: 0;
+    overflow-y: scroll;
 }
 
-.blog-subtitle {
-    margin-top: 3rem;
-    margin-bottom: 0.75rem;
-    font-size: 1.5rem;
-    font-weight: 1000;
+html, body {
+    height: 100%;
+    width: 100dvw;
+    width: 100vw;
+    scrollbar-width: none;
+    color: white;
 }
 
-.blog-extra {
-    margin-top: 1rem;
-    font-weight: 500;
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
+  display: none;
 }
-
-a {
-    text-decoration: none;
-    color: #ecedf0;
-    transition-duration: 2s;
-}
-
-a:hover {
-    text-decoration: underline;
-    color: #bacbff;
-}
-
-img {
-    width: 40%;
-    height: 40%;
-    object-fit: contain;
-}
-
