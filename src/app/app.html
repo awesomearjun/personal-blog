@@ -1,7 +1,18 @@
 <header>
-  <h1 id="blog-title">{{ header.header() }}</h1>
-  <p id="blog-subtitle">{{ header.subTitle() }}</p>
+  <div class="hero">
+    <h1 id="blog-title">{{ header.header() }}</h1>
+    <p id="blog-subtitle">{{ header.subTitle() }}</p>
+  </div>
 </header>
+
+<nav class="main-nav" aria-label="Primary Navigation">
+  <a href="/" aria-label="Go to home page" class="nav-home">arjun's blog</a>
+  <ul>
+    <li><a href="/about" aria-label="About Arjun">about</a></li>
+    <li><a href="/projects" aria-label="Projects by Arjun">projects</a></li>
+    <li><a href="/contact" aria-label="Contact Arjun">contact</a></li>
+  </ul>
+</nav>
 
 <main>
   <router-outlet></router-outlet>

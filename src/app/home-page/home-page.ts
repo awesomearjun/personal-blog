@@ -20,8 +20,8 @@ export class HomePage {
   posts = signal<Post[]>([]);
 
   ngOnInit() {
-    this.header.header.set("Arjun's Prologue");
-    this.header.subTitle.set("gettin' stuff done");
+    this.header.header.set("arjun's blog");
+    this.header.subTitle.set("just playin' around");
     this.footer.footer.set("Arjun's Prologue, no copyrights");
     this.http.get<Post[]>(
       `/assets/sites.json?v=${Date.now()}`
