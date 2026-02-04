@@ -7,6 +7,8 @@ description: I made marked have a lexer so it can parse my site and make the res
 
 # How I made my own lexer with marked
 
+## Intro
+
 Skip this paragraph and go to the next heading if you just want to know how. If you want to know the backstory or are a regular reader, then tune in. I had some insight, I want to make this blog more educational. Don't worry, I'll still try to be "funny" (if you think I'm funny), and I'll add my own personal touch but I just want to help people code the stuff that they want to code. Anyway, the progress I made on this was that I finally made images work on this blog. Don't believe me? Take a look:
 
 ![lucky you don't see this](/posts/assets/tenor-3188813723.gif 'get rekt bozo')

@@ -7,6 +7,8 @@ description: Made SEO better and styled the site a little
 
 # Site SEO + Styles
 
+## Intro
+
 HAPPY NEW YEARS 🎉🎉🎉<br>
 Sorry I didn't post, kinda either forgot or it was too close to my bedtime, I'll get back on the grind. That's not to say I didn't work on this project though. The work I did was quite a bit, although it takes a few words to explain. I keep forgetting to order the parts for the project, mostly because I don't know _what_ to order (posted a [reddit question](https://www.reddit.com/r/AskRobotics/comments/1q1ba4b/power_source_structure/), help if you can).
 

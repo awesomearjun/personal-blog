@@ -7,6 +7,8 @@ description: How to take camera footage from a Raspberry Pi 4b+ and put it on a 
 
 # Streaming Raspberry Pi Camera to Website
 
+## Intro
+
 Making this because all other tutorials outdated. Tutorial only in tutorial heading, extras read the entire thing.
 
 ## Tutorial
