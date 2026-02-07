@@ -1,11 +1,46 @@
-<ul>
-  @for (post of posts(); track post.uid) {
-    <a [routerLink]="['/post', post.slug]">
-      <article class="post">
-        <p><time [attr.datetime]="post.date">{{ post.date }}</time></p>
-        <h3>{{ post.title }}</h3>
-        <h4>{{ post.description }}</h4>
+<div class="post-list">
+  @if (featuredPost()) {
+    <a [routerLink]="['/post', featuredPost()!.slug]">
+      <article class="post" id="featured-post">
+        <h3 id="featured-title">{{ featuredPost()!.title }}</h3>
+        <p class="post-desc" id="featured-desc">{{ featuredPost()!.description }}</p>
       </article>
     </a>
   }
-</ul>
+
+  <h2 class="seperator">recent posts</h2>
+  <section aria-label="Top 3 recent posts">
+    <ul id="recent-posts">
+      @for (post of recentPosts(); track post.slug) {
+        <li>
+          <a [routerLink]="['/post', post.slug]">
+            <article class="post recent-post">
+              <h3 class="recent-title">{{ post.title }}</h3>
+              <p class="post-desc recent-desc">{{ post.description }}</p>
+            </article>
+          </a>
+        </li>
+      } @empty {
+        <p>No recent posts available.</p>
+      }
+    </ul>
+  </section>
+
+  <h2 class="seperator">older posts</h2>
+  <section aria-label="Older posts">
+    <ul id="older-posts">
+      @for (post of olderPosts(); track post.slug) {
+        <li>
+          <a [routerLink]="['/post', post.slug]">
+            <article class="post older-post">
+              <h3 class="older-title">{{ post.title }}</h3>
+              <p class="post-desc older-desc">{{ post.description }}</p>
+            </article>
+          </a>
+        </li>
+      } @empty {
+        <p>No older posts available.</p>
+      }
+    </ul>
+  </section>
+</div>

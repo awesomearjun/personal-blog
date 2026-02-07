@@ -4,5 +4,5 @@ import { Injectable, signal } from '@angular/core';
   providedIn: 'root',
 })
 export class FooterService {
-  footer = signal<string>("Arjun's Prologue, no copyrights");
+  footer = signal<string>("Arjun's Blog, no copyrights");
 }

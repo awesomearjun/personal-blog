@@ -7,6 +7,8 @@ description: GUYS I TECHNICALLY FINISHED IT
 
 # Finish blog
 
+## Intro
+
 Sorry for short blog, kinda felt lazy today. Didn't work on electrical project because it's at the stage where I actually _have_ to build a car using a material such as cardboard, so I just worked on the blog.
 
 ## Blog

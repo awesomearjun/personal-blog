@@ -7,6 +7,8 @@ description: Introducing the blog
 
 # first blog post!
 
+## Intro
+
 ## What is this?
 
 This is a place for me to store my projects and what I am working on. I need this because:

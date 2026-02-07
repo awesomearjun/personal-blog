@@ -7,6 +7,8 @@ description: Fixed site prod bug and tried to do a little style
 
 # Prod bug & style
 
+## Intro
+
 First of all, if you're reading this on Github: STOP. The website is working! Find it [here](https://www.arjuns-blog.vercel.app). Sorry if it's a little ugly cuz of dark mode, working on it!. I didn't work on car because I need to buy the components now, so I've only worked on this website.
 
 ## Website

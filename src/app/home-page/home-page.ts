@@ -17,20 +17,33 @@ export class HomePage {
   private header = inject(HeaderService);
   private footer = inject(FooterService);
 
-  posts = signal<Post[]>([]);
+  featuredPost = signal<Post | null>(null);
+  recentPosts = signal<Post[]>([]);
+  olderPosts = signal<Post[]>([]);
 
   ngOnInit() {
-    this.header.header.set("Arjun's Prologue");
-    this.header.subTitle.set("gettin' stuff done");
+    this.header.header.set("arjun's blog");
+    this.header.subTitle.set("just playin' around");
     this.footer.footer.set("Arjun's Prologue, no copyrights");
-    this.http.get<Post[]>(
-      `/assets/sites.json?v=${Date.now()}`
-    ).subscribe(data => {
-      for (let i = 0; i < data.length; i++) {
-        this.posts.set([
-          { ...data[i], date: format(parseISO(data[i].date), 'MMMM dd, yyyy') },
-          ...this.posts(),
-        ]);
+    this.http.get<Post[]>(`/assets/sites.json?v=${Date.now()}`).subscribe((data) => {
+      const flippedData = data.reverse();
+      for (let i = 0; i < flippedData.length; i++) {
+        if (i === 0) {
+          this.featuredPost.set({
+            ...flippedData[i],
+            date: format(parseISO(flippedData[i].date), 'MMMM dd, yyyy'),
+          });
+        } else if (i > 0 && i < 4) {
+          this.recentPosts.set([
+            ...this.recentPosts(),
+            { ...flippedData[i], date: format(parseISO(flippedData[i].date), 'MMMM dd, yyyy') },
+          ]);
+        } else {
+          this.olderPosts.set([
+            ...this.olderPosts(),
+            { ...flippedData[i], date: format(parseISO(flippedData[i].date), 'MMMM dd, yyyy') },
+          ]);
+        }
       }
     });
   }

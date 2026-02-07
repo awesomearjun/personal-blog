@@ -1,191 +1,214 @@
-import fs from "fs";
-import { writeFile } from "fs/promises";
-import matter from "gray-matter";
-import * as marked from "marked";
-import path from "path";
-import type { Post } from "../shared/global.ts";
-import minimist from "minimist";
+import fs from 'fs';
+import { writeFile } from 'fs/promises';
+import matter from 'gray-matter';
+import * as marked from 'marked';
+import path from 'path';
+import type { Post } from '../shared/global.ts';
+import minimist from 'minimist';
 
-const posts = fs.readdirSync(path.resolve(process.cwd(), "posts/markdown"));
+const posts = fs.readdirSync(path.resolve(process.cwd(), 'posts/markdown'));
 const regen = minimist(process.argv.slice(2)).regen ?? false;
-const imgFolder = path.resolve(process.cwd(), "posts/assets");
-const newImgFolder = path.resolve(process.cwd(), "src/assets/postAssets");
-const newSitesFolder = path.resolve(process.cwd(), "src/assets/html")
-const assetsFolder = path.resolve(process.cwd(), "src/assets")
+const imgFolder = path.resolve(process.cwd(), 'posts/assets');
+const newImgFolder = path.resolve(process.cwd(), 'src/assets/postAssets');
+const newSitesFolder = path.resolve(process.cwd(), 'src/assets/html');
+const assetsFolder = path.resolve(process.cwd(), 'src/assets');
 
 // no checks because it should exist anyway
 if (!fs.existsSync(assetsFolder)) {
-    fs.mkdirSync(assetsFolder);
+  fs.mkdirSync(assetsFolder);
 }
 
 if (!fs.existsSync(newImgFolder) || regen) {
-    if (fs.existsSync(newImgFolder) && regen) {
-        fs.rmSync(newImgFolder, { recursive: true });
-    }
-    fs.cpSync(imgFolder, newImgFolder, { recursive: true });
+  if (fs.existsSync(newImgFolder) && regen) {
+    fs.rmSync(newImgFolder, { recursive: true });
+  }
+  fs.cpSync(imgFolder, newImgFolder, { recursive: true });
 }
 
 if (!fs.existsSync(newSitesFolder) || regen) {
-    if (fs.existsSync(newSitesFolder) && regen) {
-        fs.rmSync(newSitesFolder, { recursive: true });
-    }
+  if (fs.existsSync(newSitesFolder) && regen) {
+    fs.rmSync(newSitesFolder, { recursive: true });
+  }
 
-    fs.mkdirSync(newSitesFolder);
+  fs.mkdirSync(newSitesFolder);
 }
 // sort by time created
 const sortedPosts = posts
-    .map(post => {
-        const fullPath = path.join(path.resolve(process.cwd(), "posts/markdown"), post);
-        const stats = fs.statSync(fullPath);
-        return { post, ctime: stats.birthtimeMs };
-    })
-    .sort((a, b) => a.ctime - b.ctime)
-    .map(post => post.post);
+  .map((post) => {
+    const fullPath = path.join(path.resolve(process.cwd(), 'posts/markdown'), post);
+    const stats = fs.statSync(fullPath);
+    return { post, ctime: stats.birthtimeMs };
+  })
+  .sort((a, b) => a.ctime - b.ctime)
+  .map((post) => post.post);
 
 let sites: Post[] = [];
 
 for (const post of sortedPosts) {
-    const file = matter.read(path.join(path.resolve(process.cwd(), "posts/markdown"), post));
-    const tokens = marked.lexer(file.content);
-    const htmlFileName = post.replace(".md", ".html");
-    const htmlFilePath = path.resolve(process.cwd(), "src/assets/html", htmlFileName);
+  const file = matter.read(path.join(path.resolve(process.cwd(), 'posts/markdown'), post));
+  const tokens = marked.lexer(file.content);
+  const htmlFileName = post.replace('.md', '.html');
+  const htmlFilePath = path.resolve(process.cwd(), 'src/assets/html', htmlFileName);
 
-    // Not a path to json, a path to the html file FOR the json entry
-    const jsonFilePath = `/${path.join("assets/html", htmlFileName)}`;
+  // Not a path to json, a path to the html file FOR the json entry
+  const jsonFilePath = `/${path.join('assets/html', htmlFileName)}`;
 
-    const html = makeSEO(tokens, post);
+  const html = makeSEO(tokens, post);
 
-    if (!regen) {
-        try {
-            await writeFile(htmlFilePath, html, { flag: "wx" });
-        }
-        catch {
-            sites.push({ uid: 0, slug: file.data["slug"], title: file.data["title"], date: file.data["date"], description: file.data["description"], path: jsonFilePath });
-            continue;
-        }
+  if (!regen) {
+    try {
+      await writeFile(htmlFilePath, html, { flag: 'wx' });
+    } catch {
+      sites.push({
+        uid: 0,
+        slug: file.data['slug'],
+        title: file.data['title'],
+        date: file.data['date'],
+        description: file.data['description'],
+        path: jsonFilePath,
+      });
+      continue;
     }
-    else {
-        try {
-            await writeFile(htmlFilePath, html);
-        }
-        catch (err) {
-            throw new Error(`Error rewriting file: ${err}`);
-        }
+  } else {
+    try {
+      await writeFile(htmlFilePath, html);
+    } catch (err) {
+      throw new Error(`Error rewriting file: ${err}`);
     }
+  }
 
-    sites.push({ uid: 0, slug: file.data["slug"], title: file.data["title"], date: file.data["date"], description: file.data["description"], path: jsonFilePath });
-};
+  sites.push({
+    uid: 0,
+    slug: file.data['slug'],
+    title: file.data['title'],
+    date: file.data['date'],
+    description: file.data['description'],
+    path: jsonFilePath,
+  });
+}
 
 sites.sort((a, b) => {
-    let aTime = new Date(a.date).getTime();
-    let bTime = new Date(b.date).getTime();
+  let aTime = new Date(a.date).getTime();
+  let bTime = new Date(b.date).getTime();
 
-    return aTime - bTime;
+  return aTime - bTime;
 });
-sites.forEach((site, index) => site.uid = index);
+sites.forEach((site, index) => (site.uid = index));
 
-fs.writeFile(`${path.resolve(process.cwd(), "src/assets/sites.json")}`, JSON.stringify(sites, null, 2), err => {
+fs.writeFile(
+  `${path.resolve(process.cwd(), 'src/assets/sites.json')}`,
+  JSON.stringify(sites, null, 2),
+  (err) => {
     if (err) {
-        console.error("Error writing to sites.json: ", err);
+      console.error('Error writing to sites.json: ', err);
     }
-});
+  },
+);
 
 function makeSEO(tokens: marked.TokensList, postPath: string): string {
-    let site: string = "<article>";
-    let lastWasH2 = false;
-    let lastWasH3 = false;
-    let alreadyH1 = false;
+  let site: string = '<article>';
+  let lastWasH2 = false;
+  let lastWasH3 = false;
+  let alreadyH1 = false;
 
-    for (const token of tokens) {
-        if (token.type === "heading" && token.depth === 1) {
-            site = `<article>
-            <header>
-                <h1>${token.text}</h1>
-            </header>
-            `
+  for (const token of tokens) {
+    if (token.type === 'heading' && token.depth === 1) {
+      if (alreadyH1) {
+        throw new Error(
+          `Multiple H1 headings found in markdown file ${postPath}. Only one H1 is allowed.`,
+        );
+      }
+      alreadyH1 = true;
+      continue;
+    }
 
-            alreadyH1 = true;
-            continue;
-        } else if (token.type === "heading" && token.depth === 1 && alreadyH1) {
-            throw new Error(`Multiple H1 headings found in markdown file ${postPath}. Only one H1 is allowed.`);
-        }
-
-        if (token.type === "heading" && token.depth === 2 && !lastWasH2) {
-            site = `${site}
-            <section aria-label="${token.text}">
-                <header>
-                    <h2>${token.text}</h2>
-                </header>`
-            lastWasH2 = true;
-            continue;
-        }
-        else if (token.type === "heading" && token.depth === 2 && lastWasH2) {
-            site = `${site}
+    if (token.type === 'heading' && token.depth === 2 && lastWasH3) {
+      site = `${site}
             </section>
-            <section aria-label="${token.text}">
+            </section>
+            <section class="blog-section" aria-label="${token.text}">
                 <header>
                     <h2>${token.text}</h2>
-                </header>`
-            continue;
-        }
+                </header>`;
+      lastWasH3 = false;
+      continue;
+    }
 
-        if (token.type === "heading" && token.depth === 3 && !lastWasH3) {
-            site = `${site}
+    if (token.type === 'heading' && token.depth === 2 && !lastWasH2) {
+      site = `${site}
+            <section aria-label="${token.text}" class="blog-section">
+                <header>
+                    <h2>${token.text}</h2>
+                </header>`;
+      lastWasH2 = true;
+      continue;
+    } else if (token.type === 'heading' && token.depth === 2 && lastWasH2) {
+      site = `${site}
+            </section>
+            <section aria-label="${token.text}" class="blog-section">
+                <header>
+                    <h2>${token.text}</h2>
+                </header>`;
+      continue;
+    }
+
+    if (token.type === 'heading' && token.depth === 3 && !lastWasH3) {
+      site = `${site}
                 <section aria-label="${token.text}">
                     <header>
                         <h3>${token.text}</h3>
-                    </header>`
-            lastWasH3 = true;
-            continue;
-        }
-        else if (token.type === "heading" && token.depth === 3 && lastWasH3) {
-                site = `${site}
+                    </header>`;
+      lastWasH3 = true;
+      continue;
+    } else if (token.type === 'heading' && token.depth === 3 && lastWasH3) {
+      site = `${site}
                 </section>
                 <section aria-label="${token.text}">
                     <header>
                         <h3>${token.text}</h3>
-                    </header>`
-            continue;
-        }
-        else if (token.type === "heading" && token.depth === 2 && lastWasH3) {
-            site = `${site}
-            </section>
-            <section aria-label="${token.text}">
-                <header>
-                    <h2>${token.text}</h2>
-                </header>`
-            lastWasH3 = false;
-            continue;
-        }
-
-        if (token.type === "paragraph") {
-            if (token.tokens === undefined) {
-                site += marked.parser([token]);
-                continue;
-            }
-
-            const imgSubTokens = token.tokens.filter(t => t.type === "image");
-
-            for (const imgSubToken of imgSubTokens) {
-                for (const imgSubToken of imgSubTokens) {
-                    imgSubToken.href = `/assets/postAssets/${path.basename(imgSubToken.href)}`;
-                }
-
-                imgSubToken.href = `/assets/postAssets/${path.basename(imgSubToken.href)}`;
-            }
-
-            site += marked.parser([token]);
-            continue;
-        }
-        if (token.type === "code") {
-            site = `${site}
-            <pre><code>${token.text}</code></pre>`
-            continue;
-        }
+                    </header>`;
+      continue;
     }
-    site = `${site}
+
+    if (token.type === 'paragraph') {
+      if (token.tokens === undefined) {
+        site += marked.parser([token]);
+        continue;
+      }
+
+      const imgSubTokens = token.tokens.filter((t) => t.type === 'image');
+
+      for (const imgSubToken of imgSubTokens) {
+        for (const imgSubToken of imgSubTokens) {
+          imgSubToken.href = `/assets/postAssets/${path.basename(imgSubToken.href)}`;
+        }
+
+        imgSubToken.href = `/assets/postAssets/${path.basename(imgSubToken.href)}`;
+      }
+
+      site += marked.parser([token]);
+      continue;
+    }
+    if (token.type === 'code') {
+      if (!token.lang) token.lang = 'plaintext';
+      const escapeHTML = (str: string) =>
+        str
+          .replace(/&/g, '&amp;')
+          .replace(/</g, '&lt;')
+          .replace(/>/g, '&gt;')
+          .replace(/"/g, '&quot;')
+          .replace(/'/g, '&#39;')
+          .replace(/`/g, '&#96;')
+          .replace(/\//g, '&#47;');
+      const escapedText = escapeHTML(token.text);
+      site = `${site}
+            <pre><code class="language-${token.lang}">${escapedText}</code></pre>`;
+      continue;
+    }
+  }
+  site = `${site}
     </section>
     </article>`;
 
-    return site;
+  return site;
 }
