@@ -2,15 +2,34 @@
   <div class="hero">
     <h1 id="blog-title">{{ header.header() }}</h1>
     <p id="blog-subtitle">{{ header.subTitle() }}</p>
+    <svg
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="white"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    >
+      <!-- Vertical line -->
+      <line x1="12" y1="2" x2="12" y2="18" />
+
+      <!-- Left diagonal -->
+      <line x1="6" y1="14" x2="12" y2="20" />
+
+      <!-- Right diagonal -->
+      <line x1="18" y1="14" x2="12" y2="20" />
+    </svg>
   </div>
 </header>
 
 <nav class="main-nav" aria-label="Primary Navigation">
   <a href="/" aria-label="Go to home page" class="nav-home">arjun's blog</a>
   <ul>
-    <li><a href="/about" aria-label="About Arjun">about</a></li>
-    <li><a href="/projects" aria-label="Projects by Arjun">projects</a></li>
-    <li><a href="/contact" aria-label="Contact Arjun">contact</a></li>
+    <li><a routerLink="/about" aria-label="About Arjun">about</a></li>
+    <li><a routerLink="/projects" aria-label="Projects by Arjun">projects</a></li>
+    <li><a routerLink="/contact" aria-label="Contact Arjun">contact</a></li>
   </ul>
 </nav>
 

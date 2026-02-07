@@ -25,21 +25,20 @@ export class HomePage {
     this.header.header.set("arjun's blog");
     this.header.subTitle.set("just playin' around");
     this.footer.footer.set("Arjun's Prologue, no copyrights");
-    this.http.get<Post[]>(
-      `/assets/sites.json?v=${Date.now()}`
-    ).subscribe(data => {
+    this.http.get<Post[]>(`/assets/sites.json?v=${Date.now()}`).subscribe((data) => {
       const flippedData = data.reverse();
       for (let i = 0; i < flippedData.length; i++) {
         if (i === 0) {
-          this.featuredPost.set({ ...flippedData[i], date: format(parseISO(flippedData[i].date), 'MMMM dd, yyyy') });
-        }
-        else if (i > 0 && i < 4) {
+          this.featuredPost.set({
+            ...flippedData[i],
+            date: format(parseISO(flippedData[i].date), 'MMMM dd, yyyy'),
+          });
+        } else if (i > 0 && i < 4) {
           this.recentPosts.set([
             ...this.recentPosts(),
             { ...flippedData[i], date: format(parseISO(flippedData[i].date), 'MMMM dd, yyyy') },
           ]);
-        }
-        else {
+        } else {
           this.olderPosts.set([
             { ...flippedData[i], date: format(parseISO(flippedData[i].date), 'MMMM dd, yyyy') },
             ...this.olderPosts(),
