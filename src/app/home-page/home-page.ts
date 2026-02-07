@@ -40,8 +40,8 @@ export class HomePage {
           ]);
         } else {
           this.olderPosts.set([
-            { ...flippedData[i], date: format(parseISO(flippedData[i].date), 'MMMM dd, yyyy') },
             ...this.olderPosts(),
+            { ...flippedData[i], date: format(parseISO(flippedData[i].date), 'MMMM dd, yyyy') },
           ]);
         }
       }
