@@ -191,8 +191,18 @@ function makeSEO(tokens: marked.TokensList, postPath: string): string {
     }
     if (token.type === 'code') {
       if (!token.lang) token.lang = 'plaintext';
+      const escapeHTML = (str: string) =>
+        str
+          .replace(/&/g, '&amp;')
+          .replace(/</g, '&lt;')
+          .replace(/>/g, '&gt;')
+          .replace(/"/g, '&quot;')
+          .replace(/'/g, '&#39;')
+          .replace(/`/g, '&#96;')
+          .replace(/\//g, '&#47;');
+      const escapedText = escapeHTML(token.text);
       site = `${site}
-            <pre><code class="language-${token.lang}">${token.text}</code></pre>`;
+            <pre><code class="language-${token.lang}">${escapedText}</code></pre>`;
       continue;
     }
   }

@@ -61,6 +61,7 @@ function makeSEO(tokens: marked.TokensList, postPath: string): string {
     }
 
     return site;
+}
 ```
 
 The indentation in the HTML might be kinda weird, so worth looking into formatting with `prettier` library if that's an issue.<br><br>
