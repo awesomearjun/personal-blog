@@ -98,21 +98,27 @@ function makeSEO(tokens: marked.TokensList, postPath: string): string {
 
     for (const token of tokens) {
         if (token.type === "heading" && token.depth === 1) {
-            site = `<article>
-            <header>
-                <h1>${token.text}</h1>
-            </header>
-            `
-
             alreadyH1 = true;
             continue;
         } else if (token.type === "heading" && token.depth === 1 && alreadyH1) {
             throw new Error(`Multiple H1 headings found in markdown file ${postPath}. Only one H1 is allowed.`);
         }
 
+        if (token.type === "heading" && token.depth === 2 && lastWasH3) {
+            site = `${site}
+            </section>
+            </section>
+            <section class="blog-section" aria-label="${token.text}">
+                <header>
+                    <h2>${token.text}</h2>
+                </header>`
+            lastWasH3 = false;
+            continue;
+        }
+
         if (token.type === "heading" && token.depth === 2 && !lastWasH2) {
             site = `${site}
-            <section aria-label="${token.text}">
+            <section aria-label="${token.text}" class="blog-section">
                 <header>
                     <h2>${token.text}</h2>
                 </header>`
@@ -122,7 +128,7 @@ function makeSEO(tokens: marked.TokensList, postPath: string): string {
         else if (token.type === "heading" && token.depth === 2 && lastWasH2) {
             site = `${site}
             </section>
-            <section aria-label="${token.text}">
+            <section aria-label="${token.text}" class="blog-section">
                 <header>
                     <h2>${token.text}</h2>
                 </header>`
@@ -139,22 +145,12 @@ function makeSEO(tokens: marked.TokensList, postPath: string): string {
             continue;
         }
         else if (token.type === "heading" && token.depth === 3 && lastWasH3) {
-                site = `${site}
+            site = `${site}
                 </section>
                 <section aria-label="${token.text}">
                     <header>
                         <h3>${token.text}</h3>
                     </header>`
-            continue;
-        }
-        else if (token.type === "heading" && token.depth === 2 && lastWasH3) {
-            site = `${site}
-            </section>
-            <section aria-label="${token.text}">
-                <header>
-                    <h2>${token.text}</h2>
-                </header>`
-            lastWasH3 = false;
             continue;
         }
 

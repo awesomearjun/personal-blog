@@ -1,10 +1,10 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, inject, signal, ViewEncapsulation } from '@angular/core';
 import { Post } from '../../../shared/global';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { PostFetcher } from '../post-fetcher';
 import { HttpClient } from '@angular/common/http';
-import { Title, Meta } from '@angular/platform-browser';
+import { Title, Meta, SafeHtml } from '@angular/platform-browser';
 import { DomSanitizer } from '@angular/platform-browser';
 import { HeaderService } from '../header-service';
 
@@ -12,7 +12,8 @@ import { HeaderService } from '../header-service';
   selector: 'app-blog-post',
   imports: [CommonModule, RouterLink],
   templateUrl: './blog-post.html',
-  styleUrl: './blog-post.css',
+  styleUrls: ['./blog-post.css'],
+  encapsulation: ViewEncapsulation.None
 })
 export class BlogPost {
   private route = inject(ActivatedRoute);
@@ -25,7 +26,7 @@ export class BlogPost {
   posts = signal<Post[]>([]);
   slug!: string;
 
-  content = signal<string>('');
+  content = signal<SafeHtml>(this.sanitizer.bypassSecurityTrustHtml('<h1>Loading...</h1>'));
 
   ngOnInit() {
     this.header.header.set("");
@@ -49,10 +50,12 @@ export class BlogPost {
         this.http.get(currentPostPath, { responseType: 'text' })
           .subscribe(data => {
             shadyContent = data;
-            this.content.set(this.sanitizer.bypassSecurityTrustHtml(shadyContent) as string);
+            this.content.set(this.sanitizer.bypassSecurityTrustHtml(shadyContent));
         });
 
         this.title.setTitle(currentPost.title || 'Blog Post');
+        this.header.header.set(currentPost.title || "");
+        this.header.subTitle.set(currentPost.description || "");
         this.meta.updateTag({ name: 'description', content: currentPost.description || 'No description available.' });
       });
     });
