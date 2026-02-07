@@ -1,8 +1,9 @@
 header {
   position: relative;
   width: 100%;
-  min-height: 100vh;
-  min-height: 100dvh;
+  height: 100vh;
+  height: 100dvh;
+  display: block;
 }
 
 .hero {
@@ -27,7 +28,6 @@ svg {
 .main-nav {
   position: sticky;
   top: 0;
-  margin-top: 100dvh;
   height: var(--nav-height);
   z-index: 20;
   display: flex;
