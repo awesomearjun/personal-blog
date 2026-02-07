@@ -1,20 +1,30 @@
 :root {
-    --nav-height: 10vh;
-    --nav-height: 10dvh;
+  --nav-height: 10vh;
+  --nav-height: 10dvh;
+}
+
+pre code {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 1em;
+  width: auto;
+  border-radius: 1rem;
+  text-align: left;
+  margin: 0 2rem;
 }
 
 body {
-    margin: 0;
-    padding: 0;
-    overflow-y: scroll;
+  margin: 0;
+  padding: 0;
+  overflow-y: scroll;
 }
 
-html, body {
-    min-height: 100%;
-    width: 100dvw;
-    width: 100vw;
-    scrollbar-width: none;
-    color: white;
+html,
+body {
+  min-height: 100%;
+  width: 100dvw;
+  width: 100vw;
+  scrollbar-width: none;
+  color: white;
 }
 
 html::-webkit-scrollbar,

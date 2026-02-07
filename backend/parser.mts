@@ -190,8 +190,9 @@ function makeSEO(tokens: marked.TokensList, postPath: string): string {
       continue;
     }
     if (token.type === 'code') {
+      if (!token.lang) token.lang = 'plaintext';
       site = `${site}
-            <pre><code>${token.text}</code></pre>`;
+            <pre><code class="language-${token.lang}">${token.text}</code></pre>`;
       continue;
     }
   }

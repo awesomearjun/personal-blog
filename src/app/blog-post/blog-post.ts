@@ -1,4 +1,4 @@
-import { Component, inject, signal, ViewEncapsulation } from '@angular/core';
+import { Component, ElementRef, inject, signal, ViewEncapsulation } from '@angular/core';
 import { Post } from '../../../shared/global';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, RouterLink } from '@angular/router';
@@ -7,6 +7,7 @@ import { HttpClient } from '@angular/common/http';
 import { Title, Meta, SafeHtml } from '@angular/platform-browser';
 import { DomSanitizer } from '@angular/platform-browser';
 import { HeaderService } from '../header-service';
+import { HighlightCodeService } from '../highlight-code-service';
 
 @Component({
   selector: 'app-blog-post',
@@ -23,6 +24,12 @@ export class BlogPost {
   private title = inject(Title);
   private meta = inject(Meta);
   private header = inject(HeaderService);
+  private highlightService = inject(HighlightCodeService);
+  private el = inject(ElementRef);
+
+  private highlighted = false;
+  private viewUpdated = false;
+
   posts = signal<Post[]>([]);
   slug!: string;
 
@@ -50,6 +57,10 @@ export class BlogPost {
         this.http.get(currentPostPath, { responseType: 'text' }).subscribe((data) => {
           shadyContent = data;
           this.content.set(this.sanitizer.bypassSecurityTrustHtml(shadyContent));
+
+          setTimeout(() => {
+            this.highlightCode();
+          }, 0);
         });
 
         this.title.setTitle(currentPost.title || 'Blog Post');
@@ -61,5 +72,13 @@ export class BlogPost {
         });
       });
     });
+  }
+
+  highlightCode() {
+    if (!this.highlighted) {
+      const container = this.el.nativeElement.querySelector('.content') as HTMLElement;
+      this.highlightService.highlightAll(container);
+      this.highlighted = true;
+    }
   }
 }
