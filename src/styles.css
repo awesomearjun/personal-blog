@@ -21,13 +21,12 @@ body {
 html,
 body {
   min-height: 100%;
-  width: 100dvw;
   width: 100vw;
+  width: 100dvw;
   scrollbar-width: none;
   color: white;
   margin: 0;
   padding: 0;
-  overflow-x: hidden;
 }
 
 html::-webkit-scrollbar,

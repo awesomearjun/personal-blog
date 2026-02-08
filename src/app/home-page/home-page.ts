@@ -24,27 +24,16 @@ export class HomePage {
   ngOnInit() {
     this.header.header.set("arjun's blog");
     this.header.subTitle.set("just playin' around");
-    this.footer.footer.set("Arjun's Prologue, no copyrights");
+    this.footer.footer.set("Arjun's Blog, no copyrights");
     this.http.get<Post[]>(`/assets/sites.json?v=${Date.now()}`).subscribe((data) => {
-      const flippedData = data.reverse();
-      for (let i = 0; i < flippedData.length; i++) {
-        if (i === 0) {
-          this.featuredPost.set({
-            ...flippedData[i],
-            date: format(parseISO(flippedData[i].date), 'MMMM dd, yyyy'),
-          });
-        } else if (i > 0 && i < 4) {
-          this.recentPosts.set([
-            ...this.recentPosts(),
-            { ...flippedData[i], date: format(parseISO(flippedData[i].date), 'MMMM dd, yyyy') },
-          ]);
-        } else {
-          this.olderPosts.set([
-            ...this.olderPosts(),
-            { ...flippedData[i], date: format(parseISO(flippedData[i].date), 'MMMM dd, yyyy') },
-          ]);
-        }
-      }
+      const posts = [...data].reverse().map((p) => ({
+        ...p,
+        date: format(parseISO(p.date), 'MMMM dd, yyyy'),
+      }));
+
+      this.featuredPost.set(posts[0] ?? null);
+      this.recentPosts.set(posts.slice(1, 4));
+      this.olderPosts.set(posts.slice(4));
     });
   }
 }
