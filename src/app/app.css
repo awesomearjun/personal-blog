@@ -99,6 +99,19 @@ main {
 }
 
 footer {
-  text-align: center;
-  background-color: #0f47a9;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+footer p {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 1rem;
+  color: white;
+  margin: 0;
+  padding: 0.4rem 1rem;
+  background-color: #073894;
+  border-radius: 15rem;
+  margin: 1rem 0rem;
 }
