@@ -18,18 +18,23 @@ body {
   overflow-y: scroll;
 }
 
+a {
+  text-decoration: none;
+  color: #4d8dff;
+  transition-duration: 1s;
+}
+
+a:hover {
+  text-decoration: underline;
+  text-decoration-color: #00e7e7;
+  color: #2fdada;
+}
+
 html,
 body {
   min-height: 100%;
-  width: 100vw;
-  width: 100dvw;
-  scrollbar-width: none;
+  width: 100%;
   color: white;
   margin: 0;
   padding: 0;
-}
-
-html::-webkit-scrollbar,
-body::-webkit-scrollbar {
-  display: none;
 }

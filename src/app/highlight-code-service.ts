@@ -4,8 +4,12 @@ import python from 'highlight.js/lib/languages/python';
 import markdown from 'highlight.js/lib/languages/markdown';
 import bash from 'highlight.js/lib/languages/bash';
 import javascript from 'highlight.js/lib/languages/javascript';
+import typescript from 'highlight.js/lib/languages/typescript';
+import plaintext from 'highlight.js/lib/languages/plaintext';
 
 hljs.registerLanguage('javascript', javascript);
+hljs.registerLanguage('plaintext', plaintext);
+hljs.registerLanguage('typescript', typescript);
 hljs.registerLanguage('python', python);
 hljs.registerLanguage('markdown', markdown);
 hljs.registerLanguage('bash', bash);

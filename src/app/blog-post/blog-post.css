@@ -49,6 +49,19 @@ app-blog-post header h2 {
   font-size: 0.875rem;
 }
 
+.back-home {
+  text-align: center;
+  font-size: 1rem;
+  font-family: 'DM Sans', sans-serif;
+  margin: 0 auto;
+  display: block;
+  padding: 0.4rem 1rem;
+  width: fit-content;
+  background-color: #0e1c36;
+  border-radius: 0.625rem;
+  border: 0.1rem solid #4b4b4b;
+}
+
 app-blog-post img {
   display: block;
   max-width: 100%;
