@@ -7,6 +7,8 @@ description: On my website, I made an automatic site generator and JSON file to 
 
 # Motors + Site Generator + JSON
 
+## Intro
+
 First I'll talk about the electrical project I'm working on, then my changes to this site.
 
 ## Electrical project

@@ -7,6 +7,8 @@ description: The car is tamed!
 
 # Controllable car
 
+## Intro
+
 Didn't work on the website again, only the car. I don't feel too mad about this though because this is the good part of the project. If you don't already know, I am working on: 1. this blog post you're reading as a side project, and 2. an electrical smart car using Arduinos and Raspberry Pis
 
 ## Car

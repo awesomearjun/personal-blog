@@ -1,36 +1,38 @@
-/* You can add global styles to this file, and also import other style files */
+:root {
+  --nav-height: 10vh;
+  --nav-height: 10dvh;
+}
+
+pre code {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 1em;
+  width: auto;
+  border-radius: 1rem;
+  text-align: left;
+  margin: 0 2rem;
+}
+
 body {
-    background-color: #111113;
-    color: #E4E5E7;
-    text-align: center;
-}
-
-.blog-subtitle {
-    margin-top: 3rem;
-    margin-bottom: 0.75rem;
-    font-size: 1.5rem;
-    font-weight: 1000;
-}
-
-.blog-extra {
-    margin-top: 1rem;
-    font-weight: 500;
+  overflow-y: scroll;
 }
 
 a {
-    text-decoration: none;
-    color: #ecedf0;
-    transition-duration: 2s;
+  text-decoration: none;
+  color: #4d8dff;
+  transition-duration: 1s;
 }
 
 a:hover {
-    text-decoration: underline;
-    color: #bacbff;
+  text-decoration: underline;
+  text-decoration-color: #00e7e7;
+  color: #2fdada;
 }
 
-img {
-    width: 40%;
-    height: 40%;
-    object-fit: contain;
+html,
+body {
+  min-height: 100%;
+  width: 100%;
+  color: white;
+  margin: 0;
+  padding: 0;
 }
-

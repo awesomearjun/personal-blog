@@ -17,21 +17,23 @@ export class HomePage {
   private header = inject(HeaderService);
   private footer = inject(FooterService);
 
-  posts = signal<Post[]>([]);
+  featuredPost = signal<Post | null>(null);
+  recentPosts = signal<Post[]>([]);
+  olderPosts = signal<Post[]>([]);
 
   ngOnInit() {
-    this.header.header.set("Arjun's Prologue");
-    this.header.subTitle.set("gettin' stuff done");
-    this.footer.footer.set("Arjun's Prologue, no copyrights");
-    this.http.get<Post[]>(
-      `/assets/sites.json?v=${Date.now()}`
-    ).subscribe(data => {
-      for (let i = 0; i < data.length; i++) {
-        this.posts.set([
-          { ...data[i], date: format(parseISO(data[i].date), 'MMMM dd, yyyy') },
-          ...this.posts(),
-        ]);
-      }
+    this.header.header.set("arjun's blog");
+    this.header.subTitle.set("just playin' around");
+    this.footer.footer.set("Arjun's Blog, no copyrights");
+    this.http.get<Post[]>(`/assets/sites.json?v=${Date.now()}`).subscribe((data) => {
+      const posts = [...data].reverse().map((p) => ({
+        ...p,
+        date: format(parseISO(p.date), 'MMMM dd, yyyy'),
+      }));
+
+      this.featuredPost.set(posts[0] ?? null);
+      this.recentPosts.set(posts.slice(1, 4));
+      this.olderPosts.set(posts.slice(4));
     });
   }
 }
