@@ -17,6 +17,10 @@ app-blog-post header h1 {
   padding-right: 3rem;
 }
 
+ul {
+  text-align: left;
+}
+
 app-blog-post header h3::before {
   content: '';
   display: block;

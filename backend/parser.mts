@@ -188,8 +188,7 @@ function makeSEO(tokens: marked.TokensList, postPath: string): string {
 
       site += marked.parser([token]);
       continue;
-    }
-    if (token.type === 'code') {
+    } else if (token.type === 'code') {
       if (!token.lang) token.lang = 'plaintext';
       const escapeHTML = (str: string) =>
         str
@@ -205,7 +204,10 @@ function makeSEO(tokens: marked.TokensList, postPath: string): string {
             <pre><code class="language-${token.lang}">${escapedText}</code></pre>`;
       continue;
     }
+
+    site += marked.parser([token]);
   }
+
   site = `${site}
     </section>
     </article>`;
