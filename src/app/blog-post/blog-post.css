@@ -20,6 +20,7 @@ app-blog-post header h1 {
 ul {
   text-align: left;
   font-family: 'DM Sans', sans-serif;
+  font-size: 0.875rem;
 }
 
 app-blog-post header h3::before {
