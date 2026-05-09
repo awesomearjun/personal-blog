@@ -122,95 +122,71 @@ function makeSEO(tokens: marked.TokensList, postPath: string): string {
       continue;
     }
 
-    if (token.type === 'heading' && token.depth === 2 && lastWasH3) {
-      site = `${site}
-            </section>
-            </section>
-            <section class="blog-section" aria-label="${token.text}">
-                <header>
-                    <h2>${token.text}</h2>
-                </header>`;
-      lastWasH3 = false;
-      continue;
-    }
+    if (token.type === 'heading' && token.depth === 2) {
+      if (lastWasH3) {
+        site += `</section></section>`;
+        lastWasH3 = false;
+      } else if (lastWasH2) {
+        site += `</section>`;
+      }
 
-    if (token.type === 'heading' && token.depth === 2 && !lastWasH2) {
-      site = `${site}
-            <section aria-label="${token.text}" class="blog-section">
+      site += `<section class="blog-section" aria-label="${token.text}">
                 <header>
                     <h2>${token.text}</h2>
                 </header>`;
       lastWasH2 = true;
       continue;
-    } else if (token.type === 'heading' && token.depth === 2 && lastWasH2) {
-      site = `${site}
-            </section>
-            <section aria-label="${token.text}" class="blog-section">
-                <header>
-                    <h2>${token.text}</h2>
-                </header>`;
-      continue;
     }
 
-    if (token.type === 'heading' && token.depth === 3 && !lastWasH3) {
-      site = `${site}
-                <section aria-label="${token.text}">
-                    <header>
-                        <h3>${token.text}</h3>
-                    </header>`;
+    if (token.type === 'heading' && token.depth === 3) {
+      if (lastWasH3) {
+        site += `</section>`;
+      }
+      site += `<section aria-label="${token.text}">
+                <header>
+                    <h3>${token.text}</h3>
+                </header>`;
       lastWasH3 = true;
-      continue;
-    } else if (token.type === 'heading' && token.depth === 3 && lastWasH3) {
-      site = `${site}
-                </section>
-                <section aria-label="${token.text}">
-                    <header>
-                        <h3>${token.text}</h3>
-                    </header>`;
       continue;
     }
 
     if (token.type === 'paragraph') {
-      if (token.tokens === undefined) {
-        site += marked.parser([token]);
-        continue;
+      // Correctly mutate image paths within paragraphs
+      if (token.tokens) {
+        token.tokens.forEach(t => {
+          if (t.type === 'image') {
+            t.href = `/assets/postAssets/${path.basename(t.href)}`;
+          }
+        });
       }
-
-      const imgSubTokens = token.tokens.filter((t) => t.type === 'image');
-
-      for (const imgSubToken of imgSubTokens) {
-        for (const imgSubToken of imgSubTokens) {
-          imgSubToken.href = `/assets/postAssets/${path.basename(imgSubToken.href)}`;
-        }
-
-        imgSubToken.href = `/assets/postAssets/${path.basename(imgSubToken.href)}`;
-      }
-
-      site += marked.parser([token]);
+      // Cast as any to satisfy parser if needed, though parser accepts array of tokens
+      site += marked.parser([token] as any);
       continue;
-    } else if (token.type === 'code') {
-      if (!token.lang) token.lang = 'plaintext';
+    }
+
+    if (token.type === 'code') {
+      const lang = token.lang || 'plaintext';
       const escapeHTML = (str: string) =>
         str
           .replace(/&/g, '&amp;')
           .replace(/</g, '&lt;')
           .replace(/>/g, '&gt;')
           .replace(/"/g, '&quot;')
-          .replace(/'/g, '&#39;')
-          .replace(/`/g, '&#96;')
-          .replace(/\//g, '&#47;');
-      const escapedText = escapeHTML(token.text);
-      site = `${site}
-            <pre><code class="language-${token.lang}">${escapedText}</code></pre>`;
+          .replace(/'/g, '&#39;');
+
+      site += `<pre><code class="language-${lang}">${escapeHTML(token.text)}</code></pre>`;
       continue;
     }
 
-    site += marked.parser([token]);
+    // This handles lists and everything else properly
+    site += marked.parser([token] as any);
   }
 
-  site = `${site}
-    </section>
-    </article>`;
+  // Close any remaining open sections
+  if (lastWasH3) site += '</section>';
+  if (lastWasH2) site += '</section>';
+
+  site += '</article>';
 
   return site;
 }
