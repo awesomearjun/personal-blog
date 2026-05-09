@@ -1,5 +1,6 @@
 :host {
   display: flex;
+  flex-direction: column;
 }
 
 a {
@@ -47,7 +48,24 @@ ul {
 #recent-posts {
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
   justify-content: space-between;
+  gap: 1.5rem;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+}
+
+/* This is the key: Force the list items to be equal height flex containers */
+#recent-posts li {
+  flex: 1 1 0px;
+  min-width: 250px;
+  display: flex;
+}
+
+#recent-posts li a {
+  display: flex;
+  width: 100%;
 }
 
 #older-posts,
@@ -61,9 +79,15 @@ ul {
 }
 
 .recent-post {
-  padding: 1.375rem 7.5rem 1.375rem 7.5rem;
-  width: 15.125rem;
-  height: 12.5rem;
+  padding: 1.5rem;
+  width: 100%;
+  /* min-height ensures a baseline, but flex: 1 allows it to grow to match siblings */
+  min-height: 12.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  /* Keeps title at top and desc below evenly */
+  box-sizing: border-box;
 }
 
 .recent-desc {
@@ -74,12 +98,15 @@ ul {
   overflow: hidden;
   font-size: 1rem;
   font-family: 'DM Sans', sans-serif;
+  margin-top: auto;
+  /* Pushes description to the bottom area if title is short */
 }
 
 .recent-title {
   font-size: 1.5rem;
   font-weight: 800;
   font-family: 'DM Sans', sans-serif;
+  margin-bottom: 0.5rem;
 }
 
 .seperator {
@@ -117,4 +144,23 @@ ul {
   font-size: 1.5rem;
   font-weight: 800;
   background: linear-gradient(to bottom, #10254d 0%, #10254d 50%, #0e1c36 50%, #0e1c36 100%);
+}
+
+@media (max-width: 768px) {
+  .post-list {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  .seperator {
+    font-size: 1.8rem;
+  }
+
+  #featured-title {
+    font-size: 2rem;
+  }
+
+  #recent-posts li {
+    min-width: 100%;
+  }
 }

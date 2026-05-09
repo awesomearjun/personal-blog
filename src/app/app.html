@@ -2,16 +2,8 @@
   <div class="hero">
     <h1 id="blog-title">{{ header.header() }}</h1>
     <p id="blog-subtitle">{{ header.subTitle() }}</p>
-    <svg
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="white"
-      stroke-width="2"
-      stroke-linecap="round"
-      stroke-linejoin="round"
-    >
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round"
+      stroke-linejoin="round">
       <!-- Vertical line -->
       <line x1="12" y1="2" x2="12" y2="18" />
 
@@ -26,6 +18,13 @@
 
 <nav class="main-nav" aria-label="Primary Navigation">
   <a href="/" aria-label="Go to home page" class="nav-home">arjun's blog</a>
+
+  <!-- Hamburger Menu Toggle -->
+  <input type="checkbox" id="nav-toggle" class="nav-toggle">
+  <label for="nav-toggle" class="nav-toggle-label">
+    <span></span>
+  </label>
+
   <ul>
     <li><a routerLink="/about" aria-label="About Arjun">about</a></li>
     <li><a routerLink="/projects" aria-label="Projects by Arjun">projects</a></li>

@@ -47,6 +47,9 @@ svg {
   margin-left: 3rem;
   font-family: 'Jersey 10', sans-serif;
   font-size: 3rem;
+  /* Fix for the stacking name */
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 
 .main-nav ul {
@@ -70,6 +73,92 @@ svg {
   text-decoration: none;
   color: white;
 }
+
+/* --- Hamburger Menu Logic --- */
+
+.nav-toggle {
+  display: none;
+  /* Hide the actual checkbox */
+}
+
+.nav-toggle-label {
+  display: none;
+  /* Hide the icon on desktop */
+  cursor: pointer;
+  margin-right: 2rem;
+  padding: 1rem;
+}
+
+.nav-toggle-label span,
+.nav-toggle-label span::before,
+.nav-toggle-label span::after {
+  display: block;
+  background: white;
+  height: 2px;
+  width: 2rem;
+  position: relative;
+}
+
+.nav-toggle-label span::before,
+.nav-toggle-label span::after {
+  content: '';
+  position: absolute;
+}
+
+.nav-toggle-label span::before {
+  bottom: 7px;
+}
+
+.nav-toggle-label span::after {
+  top: 7px;
+}
+
+@media (max-width: 900px) {
+  .nav-home {
+    font-size: 2rem;
+    /* Make it smaller on mobile */
+    margin-left: 1.5rem;
+  }
+
+  .nav-toggle-label {
+    display: block;
+    /* Show hamburger icon */
+  }
+
+  .main-nav ul {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background: #0e203e;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+    padding: 2rem 0;
+    margin-right: 0;
+    /* Hidden by default */
+    transform: scale(1, 0);
+    transform-origin: top;
+    transition: transform 300ms ease-in-out;
+  }
+
+  .main-nav li {
+    opacity: 0;
+    transition: opacity 200ms ease-in-out;
+  }
+
+  /* When checkbox is checked, show the menu */
+  .nav-toggle:checked~ul {
+    transform: scale(1, 1);
+  }
+
+  .nav-toggle:checked~ul li {
+    opacity: 1;
+    transition: opacity 250ms ease-in-out 200ms;
+  }
+}
+
+/* --- Rest of Original Styles --- */
 
 header h1,
 header p {
