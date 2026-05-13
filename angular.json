@@ -25,11 +25,6 @@
                 "glob": "**/*",
                 "input": "src/assets",
                 "output": "/assets"
-              },
-              {
-                "glob": "sitemap.xml",
-                "input": "src",
-                "output": "/"
               }
             ],
             "styles": [

@@ -7,7 +7,7 @@ const __dirname = path.dirname(__filename);
 
 const BASE_URL = 'https://www.arjuns-blog.vercel.app';
 const INPUT_FILE = path.join(__dirname, '..', 'src', 'assets', 'sites.json');
-const OUTPUT_FILE = path.join(__dirname, '..', 'sitemap.xml');
+const OUTPUT_FILE = path.join(__dirname, '..', 'src', 'assets', 'sitemap.xml');
 
 try {
   // 2. Read and parse the JSON data
