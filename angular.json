@@ -27,7 +27,8 @@
                 "output": "/assets"
               },
               {
-                "input": "/sitemap.xml",
+                "glob": "sitemap.xml",
+                "input": "src",
                 "output": "/"
               }
             ],
