@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "parse": "ts-node --project tsconfig.backend.json backend/parser.mts",
+    "parse": "ts-node --project tsconfig.backend.json backend/parser.mts && ts-node --project tsconfig.backend.json backend/sitemap.mts",
     "start": "ng serve",
     "prebuild": "npm run parse",
     "build": "ng build",
@@ -37,7 +37,8 @@
     "highlight.js": "^11.11.1",
     "rxjs": "~7.8.0",
     "ts-node": "^10.9.2",
-    "tslib": "^2.3.0"
+    "tslib": "^2.3.0",
+    "vercel": "^54.0.0"
   },
   "devDependencies": {
     "@angular/build": "^21.0.4",
