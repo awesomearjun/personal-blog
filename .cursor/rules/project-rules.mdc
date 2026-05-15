@@ -1,0 +1,9 @@
+---
+alwaysApply: true
+---
+
+Please keep your code in alignment with the current tech stack:
+- Angular for frontend
+- No backend but there are services at src/app
+
+If you make a functionality that you feel could be used again, put it in a service. Code in a simple angular way. If you want to make a script pre-build, those scripts are to be located at /backend/. All shared scripts between frontend and backend are at shared/. Other than that, it's a pretty standard angular blog structure.

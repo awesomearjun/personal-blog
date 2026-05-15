@@ -1,0 +1,122 @@
+:host {
+  display: block;
+}
+
+.page {
+  padding-left: 2.625rem;
+  padding-right: 2.625rem;
+  padding-bottom: 2.5rem;
+}
+
+.seperator {
+  text-align: center;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 2.5rem;
+  color: white;
+  margin: 2rem 0 1.5rem;
+}
+
+.page-section {
+  color: white;
+  background-color: #0e1c36;
+  border-radius: 0.625rem;
+  border: 0.1rem solid #4b4b4b;
+  padding: 1.5rem 2rem;
+  margin-bottom: 1.5rem;
+}
+
+.page-section h3 {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 1.5rem;
+  font-weight: 800;
+  margin: 0 0 0.75rem;
+}
+
+.page-section p,
+.page-section li {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 1rem;
+  line-height: 1.6;
+  margin: 0 0 0.75rem;
+}
+
+.page-section ul {
+  padding-left: 1.25rem;
+  margin: 0;
+}
+
+.page-section li:last-child,
+.page-section p:last-child {
+  margin-bottom: 0;
+}
+
+.project-card {
+  text-align: left;
+  padding: 0;
+  overflow: hidden;
+}
+
+.project-content {
+  padding: 1.5rem 2rem;
+}
+
+.project-image {
+  width: 100%;
+  border-bottom: 0.1rem solid #4b4b4b;
+  background-color: #073894;
+}
+
+.project-image img {
+  display: block;
+  width: 100%;
+  max-height: 14rem;
+  object-fit: cover;
+  object-position: center;
+}
+
+.tags {
+  margin-top: 0.5rem;
+}
+
+.project-card .tag {
+  display: inline-block;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.75rem;
+  padding: 0.2rem 0.6rem;
+  border-radius: 0.25rem;
+  background-color: #073894;
+  margin-right: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.contact-list {
+  list-style: none;
+  padding: 0;
+}
+
+.contact-list li {
+  margin-bottom: 0.5rem;
+}
+
+.contact-list a {
+  color: #4d8dff;
+}
+
+@media (max-width: 768px) {
+  .page {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  .seperator {
+    font-size: 1.8rem;
+  }
+
+  .project-content {
+    padding: 1.25rem 1rem;
+  }
+
+  .project-image img {
+    max-height: 10rem;
+  }
+}
