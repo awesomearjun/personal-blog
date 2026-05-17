@@ -15,14 +15,20 @@ export class ProjectsPage {
     name: string;
     description: string;
     tags: string[];
-    image?: string;
+    images?: string[];
     imageAlt?: string;
   }[] = [
     {
-      name: 'personal blog',
+      name: 'robot car',
       description:
-        'This site — Angular, static posts, and a nav bar that finally goes somewhere. Built to be fast and easy to write for.',
-      tags: ['angular', 'typescript', 'static'],
+        'A smart car using Raspberry Pi and Arduino. It can be controlled from a website and has a camera, radar, and other sensors.',
+      images: [
+        '../../assets/postAssets/IMG_0359.png',
+        '../../assets/postAssets/Screenshot 2026-01-17 at 1.55.27 PM.png',
+        '../../assets/postAssets/IMG_0361.png',
+      ],
+      imageAlt: 'A robot car',
+      tags: ['raspberry pi', 'arduino', 'robotics'],
     },
     {
       name: 'markdown pipeline',
@@ -31,10 +37,10 @@ export class ProjectsPage {
       tags: ['node', 'markdown', 'build'],
     },
     {
-      name: 'robot car',
+      name: 'personal blog',
       description:
-        'A smart car using Raspberry Pi and Arduino. It can be controlled from a website and has a camera, radar, and other sensors.',
-      tags: ['raspberry pi', 'arduino', 'robotics'],
+        'This site — Angular, static posts, and a nav bar that finally goes somewhere. Built to be fast and easy to write for.',
+      tags: ['angular', 'typescript', 'static'],
     },
   ];
 
