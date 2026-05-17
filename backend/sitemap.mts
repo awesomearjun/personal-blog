@@ -1,5 +1,5 @@
 import fs from 'fs';
-import path from "path";
+import path from 'path';
 import { fileURLToPath } from 'url';
 
 const __filename = fileURLToPath(import.meta.url);
@@ -7,7 +7,7 @@ const __dirname = path.dirname(__filename);
 
 const BASE_URL = 'https://www.arjuns-blog.vercel.app';
 const INPUT_FILE = path.join(__dirname, '..', 'src', 'assets', 'sites.json');
-const OUTPUT_FILE = path.join(__dirname, '..', 'src', 'assets', 'sitemap.xml');
+const OUTPUT_FILE = path.join(__dirname, '..', 'public', 'sitemap.xml');
 
 try {
   // 2. Read and parse the JSON data
@@ -22,7 +22,7 @@ try {
   xml += `  <url>\n    <loc>${BASE_URL}/</loc>\n    <priority>1.0</priority>\n  </url>\n`;
 
   // 4. Map each blog post to a <url> entry
-  sites.forEach(site => {
+  sites.forEach((site) => {
     // Extract just the date part (YYYY-MM-DD) from the ISO string
     const lastMod = site.date.split('T')[0];
 
@@ -43,7 +43,6 @@ try {
   // 5. Write the file to disk
   fs.writeFileSync(OUTPUT_FILE, xml);
   console.log(`✅ Success! Sitemap generated at ${OUTPUT_FILE}`);
-
 } catch (error) {
   console.error('❌ Error generating sitemap:', error.message);
 }
